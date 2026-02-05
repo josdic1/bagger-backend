@@ -1,254 +1,663 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FastAPI Test Client</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bagger | Boutique Test Client</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #1a1a1a;
-            color: #e0e0e0;
-            padding: 20px;
-            line-height: 1.6;
-        }
-        .container { max-width: 1200px; margin: 0 auto; }
-        h1 { margin-bottom: 30px; color: #fff; }
-        h2 { margin: 30px 0 15px; color: #ffd700; border-bottom: 2px solid #333; padding-bottom: 10px; }
-        h3 { margin: 15px 0 10px; color: #ccc; font-size: 16px; }
-        
-        .section { 
-            background: #252525; 
-            padding: 20px; 
-            margin-bottom: 20px; 
-            border-radius: 8px;
-            border: 1px solid #333;
-        }
-        
-        .auth-status {
-            background: #1e3a5f;
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-        }
-        .auth-status.logged-in { background: #1e4f2f; }
-        
-        input, button, select, textarea {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            border: 1px solid #444;
-            border-radius: 4px;
-            background: #333;
-            color: #e0e0e0;
-            font-size: 14px;
-        }
-        
-        button {
-            background: #4a90e2;
-            color: white;
-            cursor: pointer;
-            font-weight: 600;
-            border: none;
-            transition: background 0.2s;
-        }
-        button:hover { background: #357abd; }
-        
-        .result {
-            background: #1a1a1a;
-            padding: 15px;
-            margin-top: 10px;
-            border-radius: 4px;
-            border: 1px solid #444;
-            white-space: pre-wrap;
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        
-        .divider {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #444;
-        }
-        
-        .error { color: #ff6b6b; }
-        .success { color: #51cf66; }
-        
-        .token-display {
-            word-break: break-all;
-            font-size: 11px;
-            color: #888;
-        }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #1a1a1a;
+        color: #e0e0e0;
+        padding: 20px;
+        line-height: 1.6;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      h1 {
+        margin-bottom: 30px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      h2 {
+        margin: 30px 0 15px;
+        color: #ffd700;
+        border-bottom: 2px solid #333;
+        padding-bottom: 10px;
+      }
+      h3 {
+        margin: 15px 0 10px;
+        color: #ccc;
+        font-size: 16px;
+      }
+
+      .section {
+        background: #252525;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        border: 1px solid #333;
+      }
+
+      .auth-status {
+        background: #1e3a5f;
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+      }
+      .auth-status.logged-in {
+        background: #1e4f2f;
+      }
+
+      input,
+      button,
+      select,
+      textarea {
+        width: 100%;
+        padding: 12px;
+        margin: 8px 0;
+        border: 1px solid #444;
+        border-radius: 4px;
+        background: #333;
+        color: #e0e0e0;
+        font-size: 14px;
+      }
+
+      button {
+        background: #4a90e2;
+        color: white;
+        cursor: pointer;
+        font-weight: 600;
+        border: none;
+        transition: background 0.2s;
+      }
+      button:hover {
+        background: #357abd;
+      }
+
+      .result {
+        background: #1a1a1a;
+        padding: 15px;
+        margin-top: 10px;
+        border-radius: 4px;
+        border: 1px solid #444;
+        white-space: pre-wrap;
+        font-family: "Courier New", monospace;
+        font-size: 13px;
+        max-height: 420px;
+        overflow-y: auto;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+      }
+      .divider {
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid #444;
+      }
+
+      .error {
+        color: #ff6b6b;
+      }
+      .success {
+        color: #51cf66;
+      }
+      .token-display {
+        word-break: break-all;
+        font-size: 11px;
+        color: #888;
+      }
+
+      .pill {
+        display: inline-block;
+        padding: 3px 8px;
+        border-radius: 999px;
+        background: #333;
+        border: 1px solid #444;
+        margin: 0 6px 6px 0;
+        font-size: 12px;
+        color: #ddd;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 14px;
+      }
+      th,
+      td {
+        padding: 10px;
+        border-bottom: 1px solid #333;
+        vertical-align: top;
+      }
+      th {
+        background: #2f2f2f;
+        color: #fff;
+        text-align: left;
+      }
+      pre {
+        background: #111;
+        border: 1px solid #333;
+        padding: 10px;
+        border-radius: 6px;
+        overflow-x: auto;
+      }
+      code {
+        font-family: "Courier New", monospace;
+        font-size: 12px;
+        color: #eee;
+      }
+      .muted {
+        color: #999;
+        font-size: 12px;
+      }
     </style>
-</head>
-<body>
+  </head>
+
+  <body>
     <div class="container">
-        <h1 id="appTitle">🚀 FastAPI Test Client</h1>
-        
-        <div class="auth-status" id="authStatus">
-            <strong>Status:</strong> Not logged in
-        </div>
+      <h1 id="appTitle">💼 Bagger: Boutique Client</h1>
 
-        <!-- AUTHENTICATION -->
-        <div class="section">
-            <h2>🔐 Authentication</h2>
-            <div class="grid">
-                <div>
-                    <h3>Register</h3>
-                    <input type="email" id="regEmail" placeholder="Email">
-                    <input type="text" id="regName" placeholder="Name">
-                    <input type="password" id="regPassword" placeholder="Password">
-                    <button onclick="register()">Register</button>
-                </div>
-                <div>
-                    <h3>Login</h3>
-                    <input type="email" id="loginEmail" placeholder="Email">
-                    <input type="password" id="loginPassword" placeholder="Password">
-                    <button onclick="login()">Login</button>
-                    <button onclick="logout()" style="background: #e24a4a;">Logout</button>
-                </div>
+      <div class="auth-status" id="authStatus">
+        <strong>Status:</strong> Not logged in
+      </div>
+
+      <div class="section">
+        <h2>🔐 Authentication</h2>
+        <div class="grid">
+          <div>
+            <h3>Register</h3>
+            <input type="email" id="regEmail" placeholder="Email" />
+            <input type="text" id="regName" placeholder="Name" />
+            <input type="password" id="regPassword" placeholder="Password" />
+            <button onclick="register()">Register</button>
+          </div>
+          <div>
+            <h3>Login</h3>
+            <input type="email" id="loginEmail" placeholder="Email" />
+            <input type="password" id="loginPassword" placeholder="Password" />
+            <button onclick="login()">Login</button>
+            <button onclick="logout()" style="background: #e24a4a">
+              Logout
+            </button>
+          </div>
+        </div>
+        <div class="result" id="authResult"></div>
+      </div>
+
+      <div class="section">
+        <h2>📦 Bootstrap</h2>
+        <div class="grid">
+          <div>
+            <h3>Load /api/users/bootstrap</h3>
+            <button onclick="bootstrap()">
+              Bootstrap (User + Taxonomy + Cheats)
+            </button>
+            <div class="muted">
+              Loads platforms/topics and builds dropdowns so you stop typing
+              IDs.
             </div>
-            <div class="result" id="authResult"></div>
+          </div>
+          <div>
+            <h3>Quick View</h3>
+            <div class="muted" id="bootstrapSummary">Not loaded.</div>
+          </div>
         </div>
+        <div class="result" id="bootstrapResult"></div>
+      </div>
 
-        <!-- ADD YOUR CUSTOM SECTIONS HERE -->
-        <!-- Example:
-        <div class="section">
-            <h2>📦 Your Resource</h2>
-            <button onclick="getYourResource()">Get All</button>
-            <div class="result" id="yourResourceResult"></div>
+      <div class="section">
+        <h2>📝 Cheats</h2>
+        <div class="grid">
+          <div>
+            <h3>Fetch All (Visible)</h3>
+            <button onclick="getCheats()">Get Cheats</button>
+          </div>
+
+          <div>
+            <h3>Create New</h3>
+            <input
+              type="text"
+              id="cheatTitle"
+              placeholder="Title (e.g. Flex Center)"
+            />
+            <textarea
+              id="cheatCode"
+              placeholder="Code block..."
+              rows="3"
+            ></textarea>
+            <textarea
+              id="cheatNotes"
+              placeholder="Notes (optional)..."
+              rows="2"
+            ></textarea>
+
+            <label class="muted">Platforms (multi-select)</label>
+            <select id="platformSelect" multiple size="6"></select>
+
+            <label class="muted">Topics (multi-select)</label>
+            <select id="topicSelect" multiple size="6"></select>
+
+            <label class="muted">
+              <input type="checkbox" id="cheatIsPublic" checked />
+              Public
+            </label>
+
+            <button onclick="createCheat()" style="background: #51cf66">
+              Create Cheat
+            </button>
+          </div>
         </div>
-        -->
+        <div class="result" id="cheatsResult"></div>
+      </div>
 
+      <div class="section">
+        <h2>🏷️ Taxonomy (Platforms & Topics)</h2>
+        <div class="grid">
+          <div>
+            <h3>Platforms</h3>
+            <button onclick="listPlatforms()">List Platforms</button>
+            <div class="divider">
+              <input
+                type="text"
+                id="newPlatformName"
+                placeholder="New Platform Name"
+              />
+              <input
+                type="text"
+                id="newPlatformSlug"
+                placeholder="Slug (optional)"
+              />
+              <select id="newPlatformType">
+                <option value="language">language</option>
+                <option value="framework">framework</option>
+                <option value="tool">tool</option>
+                <option value="format">format</option>
+              </select>
+              <button onclick="createPlatform()">Add Platform</button>
+            </div>
+          </div>
+
+          <div>
+            <h3>Topics</h3>
+            <button onclick="listTopics()">List Topics</button>
+            <div class="divider">
+              <input
+                type="text"
+                id="newTopicName"
+                placeholder="New Topic Name"
+              />
+              <input
+                type="text"
+                id="newTopicSlug"
+                placeholder="Slug (optional)"
+              />
+              <button onclick="createTopic()">Add Topic</button>
+            </div>
+          </div>
+        </div>
+        <div class="result" id="taxonomyResult"></div>
+      </div>
     </div>
 
     <script>
-        // ============================================================
-        // CONFIGURATION - UPDATE THESE FOR YOUR PROJECT
-        // ============================================================
-        const CONFIG = {
-            API_URL: 'http://localhost:8080',  // ← Change port if needed
-            APP_TITLE: '🚀 FastAPI Test Client',  // ← Change app name
-            DEFAULT_LOGIN: {
-                email: '',  // ← Add default test email
-                password: ''  // ← Add default test password
-            }
+      const CONFIG = {
+        API_URL: "http://localhost:8080",
+        APP_TITLE: "💼 Bagger: Boutique Client",
+        DEFAULT_LOGIN: {
+          email: "josh@josh.com",
+          password: "1111",
+        },
+      };
+
+      let token = localStorage.getItem("token");
+
+      // Cached bootstrap data (prevents re-fetch + stops empty-loading bugs)
+      let BOOT = {
+        user: null,
+        platforms: [],
+        topics: [],
+        cheats: [],
+        user_cheats: [],
+      };
+
+      document.getElementById("appTitle").textContent = CONFIG.APP_TITLE;
+
+      if (CONFIG.DEFAULT_LOGIN.email) {
+        document.getElementById("loginEmail").value =
+          CONFIG.DEFAULT_LOGIN.email;
+        document.getElementById("loginPassword").value =
+          CONFIG.DEFAULT_LOGIN.password;
+      }
+
+      updateAuthStatus();
+
+      function updateAuthStatus() {
+        const status = document.getElementById("authStatus");
+        if (token) {
+          status.className = "auth-status logged-in";
+          status.innerHTML = `<strong>Status:</strong> ✅ Logged in<br><span class="token-display">Token Active</span>`;
+        } else {
+          status.className = "auth-status";
+          status.innerHTML = "<strong>Status:</strong> ❌ Not logged in";
+        }
+      }
+
+      function slugify(s) {
+        return (s || "").trim().toLowerCase().replace(/\s+/g, "-");
+      }
+
+      async function validateToken() {
+        if (!token) return;
+
+        const result = await apiCall("/api/users/me", "GET", null, true);
+
+        if (result.error) {
+          localStorage.removeItem("token");
+          token = null;
+        }
+
+        updateAuthStatus();
+      }
+
+      async function apiCall(
+        endpoint,
+        method = "GET",
+        body = null,
+        requiresAuth = false,
+      ) {
+        const options = {
+          method,
+          headers: { "Content-Type": "application/json" },
+        };
+        if (requiresAuth && token)
+          options.headers["Authorization"] = `Bearer ${token}`;
+        if (body) options.body = JSON.stringify(body);
+
+        try {
+          const response = await fetch(`${CONFIG.API_URL}${endpoint}`, options);
+
+          // Handle empty response bodies safely
+          const text = await response.text();
+          const data = text ? JSON.parse(text) : null;
+
+          if (!response.ok) {
+            return { error: true, status: response.status, data };
+          }
+          return { error: false, data };
+        } catch (error) {
+          return { error: true, message: error.message };
+        }
+      }
+
+      function displayResult(elementId, payload) {
+        const container = document.getElementById(elementId);
+        container.innerHTML = `<pre>${JSON.stringify(payload, null, 2)}</pre>`;
+      }
+
+      function setSummary() {
+        const el = document.getElementById("bootstrapSummary");
+        el.textContent =
+          `User: ${BOOT.user?.email || "—"} | ` +
+          `Platforms: ${BOOT.platforms.length} | ` +
+          `Topics: ${BOOT.topics.length} | ` +
+          `Cheats: ${BOOT.cheats.length}`;
+      }
+
+      function fillSelect(selectId, items) {
+        const sel = document.getElementById(selectId);
+        sel.innerHTML = "";
+        items.forEach((it) => {
+          const opt = document.createElement("option");
+          opt.value = it.id;
+          opt.textContent = `${it.name} (${it.type ? it.type : it.slug})`;
+          sel.appendChild(opt);
+        });
+      }
+
+      function getSelectedIds(selectId) {
+        const sel = document.getElementById(selectId);
+        return Array.from(sel.selectedOptions).map((o) => Number(o.value));
+      }
+
+      // AUTH
+      async function register() {
+        const email = document.getElementById("regEmail").value;
+        const name = document.getElementById("regName").value;
+        const password = document.getElementById("regPassword").value;
+
+        const result = await apiCall("/api/users/", "POST", {
+          email,
+          name,
+          password,
+        });
+        displayResult("authResult", result);
+
+        if (!result.error) {
+          document.getElementById("authResult").innerHTML +=
+            `<div class="success">✅ Registered</div>`;
+        }
+      }
+
+      async function login() {
+        const email = document.getElementById("loginEmail").value;
+        const password = document.getElementById("loginPassword").value;
+
+        const result = await apiCall("/api/users/login", "POST", {
+          email,
+          password,
+        });
+
+        if (!result.error) {
+          token = result.data.access_token;
+          localStorage.setItem("token", token);
+          updateAuthStatus();
+        }
+
+        displayResult("authResult", result);
+      }
+
+      function logout() {
+        token = null;
+        localStorage.removeItem("token");
+        updateAuthStatus();
+        document.getElementById("authResult").innerHTML =
+          `<span class="success">✅ Logged out</span>`;
+      }
+
+      // BOOTSTRAP
+      async function bootstrap() {
+        const result = await apiCall("/api/users/bootstrap", "GET", null, true);
+
+        if (!result.error) {
+          BOOT.user = result.data.user;
+          BOOT.platforms = result.data.platforms || [];
+          BOOT.topics = result.data.topics || [];
+          BOOT.cheats = result.data.cheats || [];
+          BOOT.user_cheats = result.data.user_cheats || [];
+
+          // Fill dropdowns so you never type IDs again
+          fillSelect("platformSelect", BOOT.platforms);
+          fillSelect("topicSelect", BOOT.topics);
+
+          setSummary();
+        }
+
+        displayResult("bootstrapResult", result);
+      }
+
+      // CHEATS
+      async function getCheats() {
+        const result = await apiCall("/api/cheats/", "GET", null, true);
+        displayCheatsResult(result);
+      }
+
+      function mapIdToName(list) {
+        const map = new Map();
+        list.forEach((x) => map.set(x.id, x.name));
+        return map;
+      }
+
+      function displayCheatsResult(result) {
+        const container = document.getElementById("cheatsResult");
+
+        if (result.error) {
+          container.innerHTML = `<pre>${JSON.stringify(result, null, 2)}</pre>`;
+          return;
+        }
+
+        const cheats = result.data || [];
+        if (!Array.isArray(cheats) || cheats.length === 0) {
+          container.innerHTML = `<pre>${JSON.stringify(result, null, 2)}</pre>`;
+          return;
+        }
+
+        const pMap = mapIdToName(BOOT.platforms);
+        const tMap = mapIdToName(BOOT.topics);
+
+        let html = `<table>
+          <thead>
+            <tr>
+              <th style="width:18%">Title</th>
+              <th style="width:22%">Platforms</th>
+              <th style="width:22%">Topics</th>
+              <th>Code</th>
+            </tr>
+          </thead>
+          <tbody>`;
+
+        cheats.forEach((c) => {
+          const plats = (c.platform_ids || [])
+            .map(
+              (id) => `<span class="pill">${pMap.get(id) || `#${id}`}</span>`,
+            )
+            .join("");
+          const tops = (c.topic_ids || [])
+            .map(
+              (id) => `<span class="pill">${tMap.get(id) || `#${id}`}</span>`,
+            )
+            .join("");
+
+          html += `
+            <tr>
+              <td><strong>${c.title}</strong><div class="muted">${c.is_public ? "public" : "private"}</div></td>
+              <td>${plats || `<span class="muted">—</span>`}</td>
+              <td>${tops || `<span class="muted">—</span>`}</td>
+              <td><pre><code>${escapeHtml(c.code || "")}</code></pre></td>
+            </tr>`;
+        });
+
+        html += `</tbody></table>`;
+        container.innerHTML = html;
+      }
+
+      function escapeHtml(str) {
+        return (str || "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      async function createCheat() {
+        // Require bootstrap to avoid empty taxonomy IDs
+        if (!BOOT.platforms.length || !BOOT.topics.length) {
+          document.getElementById("cheatsResult").innerHTML =
+            `<span class="error">❌ Run Bootstrap first (to load platforms/topics)</span>`;
+          return;
+        }
+
+        const body = {
+          title: document.getElementById("cheatTitle").value,
+          code: document.getElementById("cheatCode").value,
+          notes: document.getElementById("cheatNotes").value || null,
+          platform_ids: getSelectedIds("platformSelect"),
+          topic_ids: getSelectedIds("topicSelect"),
+          is_public: document.getElementById("cheatIsPublic").checked,
         };
 
-        // ============================================================
-        // CORE FUNCTIONALITY (Don't modify unless you know what you're doing)
-        // ============================================================
-        let token = localStorage.getItem('token');
-        
-        document.getElementById('appTitle').textContent = CONFIG.APP_TITLE;
-        if (CONFIG.DEFAULT_LOGIN.email) {
-            document.getElementById('loginEmail').value = CONFIG.DEFAULT_LOGIN.email;
-            document.getElementById('loginPassword').value = CONFIG.DEFAULT_LOGIN.password;
-        }
-        updateAuthStatus();
+        const result = await apiCall("/api/cheats/", "POST", body, true);
 
-        function updateAuthStatus() {
-            const status = document.getElementById('authStatus');
-            if (token) {
-                status.className = 'auth-status logged-in';
-                status.innerHTML = `<strong>Status:</strong> ✅ Logged in<br><span class="token-display">Token: ${token.substring(0, 50)}...</span>`;
-            } else {
-                status.className = 'auth-status';
-                status.innerHTML = '<strong>Status:</strong> ❌ Not logged in';
-            }
+        if (!result.error) {
+          await getCheats();
+        } else {
+          displayCheatsResult(result);
         }
+      }
 
-        async function apiCall(endpoint, method = 'GET', body = null, requiresAuth = false) {
-            const options = {
-                method,
-                headers: { 'Content-Type': 'application/json' }
-            };
-            
-            if (requiresAuth && token) {
-                options.headers['Authorization'] = `Bearer ${token}`;
-            }
-            
-            if (body) {
-                options.body = JSON.stringify(body);
-            }
-            
-            try {
-                const response = await fetch(`${CONFIG.API_URL}${endpoint}`, options);
-                
-                if (method === 'DELETE' && response.status === 204) {
-                    return { error: false, data: null };
-                }
-                
-                const data = await response.json();
-                
-                if (!response.ok) {
-                    return { error: true, status: response.status, data };
-                }
-                
-                return { error: false, data };
-            } catch (error) {
-                return { error: true, message: error.message };
-            }
+      // TAXONOMY
+      async function listPlatforms() {
+        // If you don't have GET endpoints, use bootstrap as your list
+        const result = await apiCall("/api/users/bootstrap", "GET", null, true);
+        if (!result.error) {
+          BOOT.platforms = result.data.platforms || [];
+          fillSelect("platformSelect", BOOT.platforms);
+          setSummary();
         }
+        displayResult("taxonomyResult", result);
+      }
 
-        function displayResult(elementId, result) {
-            const el = document.getElementById(elementId);
-            if (result.error) {
-                el.innerHTML = `<span class="error">❌ Error: ${JSON.stringify(result, null, 2)}</span>`;
-            } else {
-                el.innerHTML = `<span class="success">✅ Success:</span>\n${JSON.stringify(result.data, null, 2)}`;
-            }
+      async function createPlatform() {
+        const name = document.getElementById("newPlatformName").value;
+        const slug =
+          document.getElementById("newPlatformSlug").value || slugify(name);
+        const type = document.getElementById("newPlatformType").value;
+
+        const result = await apiCall(
+          "/api/cheats/platforms/",
+          "POST",
+          { name, slug, type },
+          true,
+        );
+
+        if (!result.error) {
+          await bootstrap();
+        } else {
+          displayResult("taxonomyResult", result);
         }
+      }
 
-        // AUTH FUNCTIONS
-        async function register() {
-            const email = document.getElementById('regEmail').value;
-            const name = document.getElementById('regName').value;
-            const password = document.getElementById('regPassword').value;
-            const result = await apiCall('/users', 'POST', { email, name, password });
-            displayResult('authResult', result);
+      async function listTopics() {
+        const result = await apiCall("/api/users/bootstrap", "GET", null, true);
+        if (!result.error) {
+          BOOT.topics = result.data.topics || [];
+          fillSelect("topicSelect", BOOT.topics);
+          setSummary();
         }
+        displayResult("taxonomyResult", result);
+      }
 
-        async function login() {
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            const result = await apiCall('/users/login', 'POST', { email, password });
-            
-            if (!result.error) {
-                token = result.data.access_token;
-                localStorage.setItem('token', token);
-                updateAuthStatus();
-            }
-            
-            displayResult('authResult', result);
+      async function createTopic() {
+        const name = document.getElementById("newTopicName").value;
+        const slug =
+          document.getElementById("newTopicSlug").value || slugify(name);
+
+        const result = await apiCall(
+          "/api/cheats/topics/",
+          "POST",
+          { name, slug },
+          true,
+        );
+
+        if (!result.error) {
+          await bootstrap();
+        } else {
+          displayResult("taxonomyResult", result);
         }
-
-        function logout() {
-            token = null;
-            localStorage.removeItem('token');
-            updateAuthStatus();
-            document.getElementById('authResult').innerHTML = '<span class="success">✅ Logged out</span>';
-        }
-
-        // ============================================================
-        // ADD YOUR CUSTOM FUNCTIONS HERE
-        // ============================================================
-        
-        // Example:
-        // async function getYourResource() {
-        //     const result = await apiCall('/your-resource/', 'GET', null, true);
-        //     displayResult('yourResourceResult', result);
-        // }
-        
+      }
     </script>
-</body>
+  </body>
 </html>

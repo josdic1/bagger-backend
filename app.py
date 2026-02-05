@@ -1,36 +1,52 @@
-# app.py
-"""
-Main FastAPI application with authentication.
-"""
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from database import engine, Base
-from routes.users import router as user_router
+from contextlib import asynccontextmanager
 
-# Create database tables
-Base.metadata.create_all(bind=engine)
+from database import engine, Base, SessionLocal
+from config import settings
+from routes.users import router as user_router
+from routes.cheats import router as cheat_router
+from seed import seed_if_empty
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Create tables (until Alembic)
+    Base.metadata.create_all(bind=engine)
+
+    # Seed taxonomy if empty
+    db = SessionLocal()
+    try:
+        seed_if_empty(db)
+    finally:
+        db.close()
+
+    yield
+
 
 app = FastAPI(
-    title="FastAPI Auth Template",
-    description="Production-ready authentication system",
-    version="1.0.0"
+    title=settings.APP_TITLE,
+    description=settings.APP_DESCRIPTION,
+    version=settings.APP_VERSION,
+    lifespan=lifespan
 )
 
-# CORS middleware (configure for your frontend)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Change to specific origins in production
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Register routes
-app.include_router(user_router, prefix="/users", tags=["Users"])
+app.include_router(user_router, prefix="/api/users", tags=["Users"])
+app.include_router(cheat_router, prefix="/api/cheats", tags=["Cheats"])
+
 
 @app.get("/")
 def home():
-    return {"message": "FastAPI Auth Template - Ready to use!"}
+    return {"message": f"{settings.APP_TITLE} is online."}
+
 
 if __name__ == "__main__":
     import uvicorn
