@@ -33,12 +33,14 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        settings.FRONTEND_URL,
+        "http://localhost:5173",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 app.include_router(user_router, prefix="/api/users", tags=["Users"])
 app.include_router(cheat_router, prefix="/api/cheats", tags=["Cheats"])
 
@@ -46,6 +48,10 @@ app.include_router(cheat_router, prefix="/api/cheats", tags=["Cheats"])
 @app.get("/")
 def home():
     return {"message": f"{settings.APP_TITLE} is online."}
+
+@app.get("/health")
+def health():
+    return {"ok": True}
 
 
 if __name__ == "__main__":

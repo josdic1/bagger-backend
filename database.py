@@ -1,21 +1,28 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
-from config import settings 
+from config import settings
 
-# Create the connection engine
-engine = create_engine(
-    settings.DATABASE_URL,
-    connect_args={"check_same_thread": False}  # Specific for SQLite
+DATABASE_URL = settings.DATABASE_URL
+
+def is_sqlite(url: str) -> bool:
+    return url.startswith("sqlite")
+
+engine_kwargs = {}
+
+if is_sqlite(DATABASE_URL):
+    engine_kwargs["connect_args"] = {"check_same_thread": False}
+
+engine = create_engine(DATABASE_URL, **engine_kwargs)
+
+SessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine
 )
 
-# Create the session factory
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-# Modern SQLAlchemy 2.0 Base class
 class Base(DeclarativeBase):
     pass
 
-# Dependency injection for routes
 def get_db():
     db = SessionLocal()
     try:
