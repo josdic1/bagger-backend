@@ -6,6 +6,8 @@ from database import engine, Base, SessionLocal
 from config import settings
 from routes.users import router as user_router
 from routes.cheats import router as cheat_router
+from routes.platforms import router as platform_router
+from routes.topics import router as topic_router
 from seed import seed_if_empty
 
 
@@ -37,13 +39,14 @@ app.add_middleware(
         settings.FRONTEND_URL,
         "http://localhost:5173",
     ],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 app.include_router(user_router, prefix="/api/users", tags=["Users"])
 app.include_router(cheat_router, prefix="/api/cheats", tags=["Cheats"])
-
+app.include_router(platform_router, prefix="/api/platforms", tags=["Platforms"])
+app.include_router(topic_router, prefix="/api/topics", tags=["Topics"])
 
 @app.get("/")
 def home():

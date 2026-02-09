@@ -17,18 +17,8 @@ from schemas.cheat import (
     UserCheatUpdate,
     UserCheatResponse,
 )
-from schemas.taxonomy import (
-    TaxonomyCreate,
-    PlatformUpdate,
-    TopicUpdate,
-)
 
 router = APIRouter()
-
-
-def slugify(name: str) -> str:
-    return name.strip().lower().replace(" ", "-")
-
 
 def cheat_to_response(cheat: Cheat) -> CheatResponse:
     return CheatResponse(
@@ -223,93 +213,5 @@ def delete_my_overlay(
         return Response(status_code=status.HTTP_204_NO_CONTENT)
 
     db.delete(overlay)
-    db.commit()
-    return Response(status_code=status.HTTP_204_NO_CONTENT)
-
-
-# =========================
-# TAXONOMY: Platforms
-# =========================
-
-@router.post("/platforms/", status_code=201)
-def add_platform(data: TaxonomyCreate, db: Session = Depends(get_db)):
-    slug = data.slug or slugify(data.name)
-    platform = Platform(name=data.name, slug=slug, type=data.type or "language")
-    db.add(platform)
-    db.commit()
-    return {"message": f"Added platform: {data.name}"}
-
-
-@router.patch("/platforms/{platform_id}", status_code=200)
-def update_platform(platform_id: int, patch: PlatformUpdate, db: Session = Depends(get_db)):
-    platform = db.query(Platform).filter(Platform.id == platform_id).first()
-    if not platform:
-        raise HTTPException(404, "Platform not found")
-
-    if patch.name is not None:
-        platform.name = patch.name
-    if patch.slug is not None:
-        platform.slug = patch.slug
-    if patch.type is not None:
-        platform.type = patch.type
-
-    db.commit()
-    return {"message": "Platform updated"}
-
-
-@router.delete("/platforms/{platform_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_platform(platform_id: int, db: Session = Depends(get_db)):
-    platform = db.query(Platform).filter(Platform.id == platform_id).first()
-    if not platform:
-        return Response(status_code=status.HTTP_204_NO_CONTENT)
-
-    in_use = db.query(CheatPlatform).filter(CheatPlatform.platform_id == platform_id).first()
-    if in_use:
-        raise HTTPException(409, "Platform is in use by cheats (remove links first)")
-
-    db.delete(platform)
-    db.commit()
-    return Response(status_code=status.HTTP_204_NO_CONTENT)
-
-
-# =========================
-# TAXONOMY: Topics
-# =========================
-
-@router.post("/topics/", status_code=201)
-def add_topic(data: TaxonomyCreate, db: Session = Depends(get_db)):
-    slug = data.slug or slugify(data.name)
-    topic = Topic(name=data.name, slug=slug)
-    db.add(topic)
-    db.commit()
-    return {"message": f"Added topic: {data.name}"}
-
-
-@router.patch("/topics/{topic_id}", status_code=200)
-def update_topic(topic_id: int, patch: TopicUpdate, db: Session = Depends(get_db)):
-    topic = db.query(Topic).filter(Topic.id == topic_id).first()
-    if not topic:
-        raise HTTPException(404, "Topic not found")
-
-    if patch.name is not None:
-        topic.name = patch.name
-    if patch.slug is not None:
-        topic.slug = patch.slug
-
-    db.commit()
-    return {"message": "Topic updated"}
-
-
-@router.delete("/topics/{topic_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_topic(topic_id: int, db: Session = Depends(get_db)):
-    topic = db.query(Topic).filter(Topic.id == topic_id).first()
-    if not topic:
-        return Response(status_code=status.HTTP_204_NO_CONTENT)
-
-    in_use = db.query(CheatTopic).filter(CheatTopic.topic_id == topic_id).first()
-    if in_use:
-        raise HTTPException(409, "Topic is in use by cheats (remove links first)")
-
-    db.delete(topic)
     db.commit()
     return Response(status_code=status.HTTP_204_NO_CONTENT)
