@@ -1,18 +1,30 @@
-# Sensitive environment variables
+# Dependencies
+node_modules/
+venv/
+dist/
+dist-ssr/
+
+# Environment / Secrets
+.env
+.env.local
+.env.*.local
 *.env
 
-# Python virtual environment
-venv/
-
-# Python bytecode and cache
+# Python Cache & Bytecode
 __pycache__/
 *.pyc
 
-# Database files
+# Database
 *.db
 *.sqlite
 *.sqlite3
 instance/
 
-# System files
+# System / IDE
 .DS_Store
+.vscode/
+.idea/
+*.log
+*.iws
+*.iml
+*.ipr
