@@ -36,7 +36,6 @@ def _truncate_all(db):
     if dialect == "sqlite":
         db.execute(text("PRAGMA foreign_keys=OFF;"))
 
-        # get existing tables in this sqlite db
         existing = {
             row[0]
             for row in db.execute(
@@ -44,7 +43,6 @@ def _truncate_all(db):
             ).fetchall()
         }
 
-        # delete in FK-safe order, but only if table exists
         for table in [
             "user_cheats",
             "cheat_topics",
@@ -57,7 +55,6 @@ def _truncate_all(db):
             if table in existing:
                 db.execute(text(f"DELETE FROM {table};"))
 
-        # reset autoincrement counters (only if sqlite_sequence exists)
         if "sqlite_sequence" in existing:
             db.execute(text("DELETE FROM sqlite_sequence;"))
 
