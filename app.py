@@ -8,7 +8,7 @@ from routes.users import router as user_router
 from routes.cheats import router as cheat_router
 from routes.platforms import router as platform_router
 from routes.topics import router as topic_router
-from seed import seed_if_empty
+from seed_restore import seed_if_empty
 
 
 @asynccontextmanager
