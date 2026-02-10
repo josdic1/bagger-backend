@@ -1,0 +1,1123 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "email": "josh@josh.com",
+            "name": "Josh",
+            "password_hash": "$2b$12$ee.cu5gL.73V.1clUqRh0eNgQHfEpOFCvqDiXGlBW2vOyRtLB7q7i",
+            "is_admin": 0,
+            "created_at": "2026-02-06 21:43:43.922876",
+            "updated_at": "2026-02-06 21:43:43.922878"
+        }
+    ],
+    "platforms": [
+        {
+            "id": 1,
+            "name": "CSS",
+            "slug": "css",
+            "type": "language"
+        },
+        {
+            "id": 2,
+            "name": "HTML",
+            "slug": "html",
+            "type": "language"
+        },
+        {
+            "id": 3,
+            "name": "JavaScript",
+            "slug": "javascript",
+            "type": "language"
+        },
+        {
+            "id": 4,
+            "name": "Python",
+            "slug": "python",
+            "type": "language"
+        },
+        {
+            "id": 5,
+            "name": "React",
+            "slug": "react",
+            "type": "framework"
+        },
+        {
+            "id": 6,
+            "name": "SQL",
+            "slug": "sql",
+            "type": "language"
+        },
+        {
+            "id": 7,
+            "name": "Terminal",
+            "slug": "terminal",
+            "type": "tool"
+        },
+        {
+            "id": 8,
+            "name": "Regex",
+            "slug": "regex",
+            "type": "tool"
+        },
+        {
+            "id": 9,
+            "name": "JSON",
+            "slug": "json",
+            "type": "format"
+        },
+        {
+            "id": 10,
+            "name": "XML",
+            "slug": "xml",
+            "type": "format"
+        }
+    ],
+    "topics": [
+        {
+            "id": 1,
+            "name": "Arrays",
+            "slug": "arrays"
+        },
+        {
+            "id": 2,
+            "name": "Classes",
+            "slug": "classes"
+        },
+        {
+            "id": 3,
+            "name": "Functions",
+            "slug": "functions"
+        },
+        {
+            "id": 4,
+            "name": "Loops",
+            "slug": "loops"
+        },
+        {
+            "id": 5,
+            "name": "Components",
+            "slug": "components"
+        },
+        {
+            "id": 6,
+            "name": "Setup / Tooling",
+            "slug": "setup-tooling"
+        },
+        {
+            "id": 7,
+            "name": "HTTP / API",
+            "slug": "http-api"
+        },
+        {
+            "id": 8,
+            "name": "Debugging",
+            "slug": "debugging"
+        },
+        {
+            "id": 9,
+            "name": "Strings",
+            "slug": "strings"
+        },
+        {
+            "id": 10,
+            "name": "Data Transform",
+            "slug": "data-transform"
+        },
+        {
+            "id": 11,
+            "name": "Styling",
+            "slug": "styling"
+        },
+        {
+            "id": 12,
+            "name": "DOM / Events",
+            "slug": "dom-events"
+        },
+        {
+            "id": 13,
+            "name": "File I/O",
+            "slug": "file-io"
+        },
+        {
+            "id": 14,
+            "name": "Database",
+            "slug": "database"
+        }
+    ],
+    "cheats": [
+        {
+            "id": 1,
+            "title": "main.jsx",
+            "code": "// src/main.jsx\nimport { StrictMode } from \"react\";\nimport { createRoot } from \"react-dom/client\";\nimport { RouterProvider } from \"react-router-dom\";\nimport { AuthProvider } from \"./providers/AuthProvider.jsx\";\nimport { DataProvider } from \"./providers/DataProvider.jsx\";\nimport { router } from \"./routes.jsx\";\nimport \"./index.css\";\n\ncreateRoot(document.getElementById(\"root\")).render(\n  <StrictMode>\n    <AuthProvider>\n      <DataProvider>\n        <RouterProvider router={router} />\n      </DataProvider>\n    </AuthProvider>\n  </StrictMode>\n);",
+            "notes": "Dead simple entry point. Never touch this file after initial setup.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-06 22:22:09.009882",
+            "updated_at": "2026-02-09 18:39:06.444394",
+            "metadata_tag": "frontend"
+        },
+        {
+            "id": 2,
+            "title": "App.jsx",
+            "code": "// src/App.jsx\nimport { Outlet } from \"react-router-dom\";\n\nexport default function App() {\n  return <Outlet />;\n}",
+            "notes": "All providers in one place. Order matters: Router \u2192 Auth \u2192 Data \u2192 Shell. Easy to see entire provider stack.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-06 22:22:48.369470",
+            "updated_at": "2026-02-09 19:32:26.596437",
+            "metadata_tag": null
+        },
+        {
+            "id": 3,
+            "title": "AppShell.jsx",
+            "code": "// src/components/shared/AppShell.jsx\nimport { Outlet } from \"react-router-dom\";\nimport { NavBar } from \"./NavBar.jsx\";\nimport { ToastContainer } from \"./ToastContainer.jsx\";\nimport { SyncIndicator } from \"./SyncIndicator.jsx\";\n\nexport function AppShell() {\n  return (\n    <div className=\"app-shell\">\n      <NavBar />\n      <SyncIndicator />\n      <main className=\"app-main\">\n        <Outlet />\n      </main>\n      <ToastContainer />\n    </div>\n  );\n}\n",
+            "notes": "Layout + routing separated from provider noise. Add global layout elements here (Navbar, Footer, etc).",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-06 22:23:39.471640",
+            "updated_at": "2026-02-07 00:09:07.264581",
+            "metadata_tag": null
+        },
+        {
+            "id": 4,
+            "title": "inEditMode Boolean",
+            "code": "const inEditMode = Boolean(id);",
+            "notes": "It\u2019s more explicit and readable than the \"double bang\" (!!id) syntax, making it easier for juniors or clients to follow the logic.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-06 22:45:02.003341",
+            "updated_at": "2026-02-07 00:09:20.696321",
+            "metadata_tag": null
+        },
+        {
+            "id": 5,
+            "title": ".gitignore",
+            "code": "# Dependencies\nnode_modules/\nvenv/\ndist/\ndist-ssr/\n\n# Environment / Secrets\n.env\n.env.local\n.env.*.local\n*.env\n\n# Python Cache & Bytecode\n__pycache__/\n*.pyc\n\n# Database\n*.db\n*.sqlite\n*.sqlite3\ninstance/\n\n# System / IDE\n.DS_Store\n.vscode/\n.idea/\n*.log\n*.iws\n*.iml\n*.ipr",
+            "notes": "Security: Ensuring .env.local is ignored is non-negotiable for full-stack apps to prevent leaking API keys.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-06 23:02:36.013206",
+            "updated_at": "2026-02-09 19:42:45.195074",
+            "metadata_tag": null
+        },
+        {
+            "id": 6,
+            "title": "AuthContext.jsx",
+            "code": "import { createContext } from \"react\";\n\nexport const AuthContext = createContext();",
+            "notes": "Creates context object for sharing state across components. Export to use in provider and custom hook.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-06 23:06:37.795297",
+            "updated_at": "2026-02-07 00:08:41.178258",
+            "metadata_tag": null
+        },
+        {
+            "id": 7,
+            "title": "Vite .env",
+            "code": "# For local development\nVITE_API_URL=http://localhost:8080\n\n# When you eventually deploy to a real site (like Netlify or Vercel):\n# VITE_API_URL=https://your-real-backend.herokuapp.com",
+            "notes": "Prefix with VITE_ for client-side exposure. Use process.env.VITE_API_URL in code. Comment out production value during dev.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-06 23:09:22.013550",
+            "updated_at": "2026-02-07 00:09:53.562316",
+            "metadata_tag": null
+        },
+        {
+            "id": 8,
+            "title": "utils/safe.js",
+            "code": "// src/utils/safe.js\n\nexport const safe = {\n  // Always returns an array, prevents .map() crashes\n  array: (x) => (Array.isArray(x) ? x : []),\n  \n  // Clean strings for UI display\n  string: (x, fallback = \"\") => (typeof x === \"string\" ? x.trim() : fallback),\n  \n  // Safe ID handling (Backend might send int, Frontend needs string)\n  id: (x) => (x == null ? \"\" : String(x)),\n\n  // Formats currency consistently\n  currency: (amount) => new Intl.NumberFormat('en-US', {\n    style: 'currency',\n    currency: 'USD',\n  }).format(amount || 0),\n\n  // Relative time (e.g., \"5 mins ago\")\n  timeAgo: (date) => {\n    if (!date) return \"\";\n    const seconds = Math.floor((new Date() - new Date(date)) / 1000);\n    if (seconds < 60) return \"just now\";\n    const minutes = Math.floor(seconds / 60);\n    return `${minutes}m ago`;\n  }\n};",
+            "notes": "This is your best friend when using useData(). Use it like: {safe.array(cheats).map(c => ...)}.\nsafe.currency: Keeps your laundromat/inventory app pricing consistent across the UI.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-06 23:10:49.428819",
+            "updated_at": "2026-02-07 17:27:48.519950",
+            "metadata_tag": null
+        },
+        {
+            "id": 9,
+            "title": "utils/api.js",
+            "code": "// src/utils/api.js\n\nconst getBaseUrl = () => {\n  const url = import.meta.env.VITE_API_URL;\n  if (!url) throw new Error(\"Missing VITE_API_URL\");\n  if (import.meta.env.PROD && url.includes(\"localhost\")) {\n    throw new Error(\"Production build pointing to localhost!\");\n  }\n  return url.endsWith('/') ? url.slice(0, -1) : url;\n};\n\nexport const apiRequest = async (path, options = {}) => {\n  const url = `${getBaseUrl()}${path.startsWith('/') ? path : `/${path}`}`;\n  const token = localStorage.getItem(\"token\");\n\n  const headers = {\n    \"Content-Type\": \"application/json\",\n    ...(token && { Authorization: `Bearer ${token}` }),\n    ...options.headers,\n  };\n\n  const response = await fetch(url, { ...options, headers });\n\n  // Handle 401 Unauthorized globally\n  if (response.status === 401) {\n    localStorage.removeItem(\"token\");\n    window.location.href = \"/login\"; \n    throw new Error(\"Session expired\");\n  }\n\n  const data = response.status !== 204 ? await response.json().catch(() => null) : null;\n\n  if (!response.ok) {\n    throw new Error(data?.detail || data?.message || `Error ${response.status}`);\n  }\n\n  return data;\n};\n\nexport const api = {\n  get: (p) => apiRequest(p),\n  post: (p, d) => apiRequest(p, { method: \"POST\", body: JSON.stringify(d) }),\n  patch: (p, d) => apiRequest(p, { method: \"PATCH\", body: JSON.stringify(d) }),\n  delete: (p) => apiRequest(p, { method: \"DELETE\" }),\n};",
+            "notes": "Global 401 Handling: Redirecting to login automatically on a 401 is essential for user experience.\nTrailing Slash Safety: The getBaseUrl logic ensures you don't end up with //api/path.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-06 23:11:38.866546",
+            "updated_at": "2026-02-07 00:10:19.063773",
+            "metadata_tag": null
+        },
+        {
+            "id": 10,
+            "title": "vite.config.js",
+            "code": "// vite.config.js\nimport { defineConfig } from \"vite\";\nimport react from \"@vitejs/plugin-react\";\n\nexport default defineConfig({\n  plugins: [react()],\n\n  server: {\n    port: 5173,\n    strictPort: true,\n\n    proxy: {\n      \"/api\": {\n        target: \"http://localhost:5555\",\n        changeOrigin: true,\n        secure: false, // avoids issues with local https/self-signed\n        rewrite: (path) => path.replace(/^\\/api/, \"\")\n      }\n    }\n  }\n});\n",
+            "notes": "Because random port switching is annoying when your backend expects 5173. Prevents dev HTTPS headaches later.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-06 23:20:02.070552",
+            "updated_at": "2026-02-07 00:10:26.826129",
+            "metadata_tag": null
+        },
+        {
+            "id": 11,
+            "title": "AuthProvider.jsx",
+            "code": "// src/providers/AuthProvider.jsx\nimport { useState, useEffect, useMemo, useCallback } from \"react\";\nimport { AuthContext } from \"../contexts/AuthContext\";\nimport { api, retryRequest } from \"../utils/api\";\n\nexport function AuthProvider({ children }) {\n  const [user, setUser] = useState(null);\n  const [loading, setLoading] = useState(true);\n\n  // Hard reset: Nukes token and forces a clean page load to prevent state ghosts\n  const forceLogout = useCallback(() => {\n    localStorage.removeItem(\"token\");\n    setUser(null);\n    if (window.location.pathname !== \"/login\") {\n      window.location.replace(\"/login\");\n    }\n  }, []);\n\n  useEffect(() => {\n    const checkSession = async () => {\n      const token = localStorage.getItem(\"token\");\n      if (!token) return setLoading(false);\n\n      try {\n        // Retry logic handles blips in connection without kicking the user out\n        const userData = await retryRequest(() => api.get(\"/users/me\"));\n        setUser(userData);\n      } catch (err) {\n        // Global 401 check: If unauthorized, don't ask questions, just logout.\n        if (err?.message?.includes(\"401\")) {\n          forceLogout();\n        } else {\n          console.error(\"Session sync failed:\", err.message);\n        }\n      } finally {\n        setLoading(false);\n      }\n    };\n\n    checkSession();\n  }, [forceLogout]);\n\n  const login = async (credentials) => {\n    try {\n      const data = await api.post(\"/auth/login\", credentials);\n      const token = data?.access_token || data?.token;\n\n      if (token) {\n        localStorage.setItem(\"token\", token);\n        setUser(data.user);\n        return { success: true };\n      }\n      throw new Error(\"Invalid server response\");\n    } catch (err) {\n      return { success: false, error: err.message };\n    }\n  };\n\n  const signup = async (formData) => {\n    try {\n      await api.post(\"/auth/signup\", formData);\n      return await login({ email: formData.email, password: formData.password });\n    } catch (err) {\n      return { success: false, error: err.message };\n    }\n  };\n\n  const value = useMemo(() => ({ \n    user, \n    loading, \n    login, \n    signup, \n    logout: forceLogout,\n    isAuthed: !!user \n  }), [user, loading, forceLogout]);\n\n  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;\n}",
+            "notes": "Kills the entire JS process and restarts it at the login page. Clean slate. It looks for access_token OR token, making it compatible with more backend styles (Flask-JWT, Express, etc.).",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-06 23:25:11.843788",
+            "updated_at": "2026-02-06 23:25:11.843792",
+            "metadata_tag": null
+        },
+        {
+            "id": 12,
+            "title": "DataProvider.jsx",
+            "code": "// src/providers/DataProvider.jsx\nimport { useState, useEffect, useContext, useCallback, useMemo, useRef } from \"react\";\nimport { DataContext } from \"../contexts/DataContext\";\nimport { AuthContext } from \"../contexts/AuthContext\";\nimport { api, retryRequest } from \"../utils/api\";\nimport { asArrayOfObjects } from \"../utils/safe\";\n\nconst CACHE_TTL_MS = 5 * 60 * 1000;\n\nexport function DataProvider({ children }) {\n  const { user, loading: authLoading } = useContext(AuthContext);\n  const loggedIn = !!user;\n  \n  const [loading, setLoading] = useState(true);\n  const [refreshing, setRefreshing] = useState(false);\n  const [error, setError] = useState(null);\n  const [entities, setEntities] = useState([]);\n  \n  // Ref to prevent multiple simultaneous \"refresh/bootstrap\" calls\n  const isFetching = useRef(false);\n\n  const cacheKey = useMemo(\n    () => (user?.id ? `bagger_cache_u${user.id}` : null),\n    [user?.id]\n  );\n\n  const writeCache = useCallback(\n    (nextEntities) => {\n      if (!cacheKey) return;\n      try {\n        localStorage.setItem(\n          cacheKey,\n          JSON.stringify({ entities: asArrayOfObjects(nextEntities) })\n        );\n        localStorage.setItem(`${cacheKey}_time`, String(Date.now()));\n      } catch (e) {\n        console.error(\"Cache write failed\", e);\n      }\n    },\n    [cacheKey]\n  );\n\n  const readCache = useCallback(() => {\n    if (!cacheKey) return null;\n\n    const cachedData = localStorage.getItem(cacheKey);\n    const cacheTime = localStorage.getItem(`${cacheKey}_time`);\n    if (!cachedData || !cacheTime) return null;\n\n    const age = Date.now() - Number(cacheTime);\n    if (Number.isNaN(age) || age > CACHE_TTL_MS) return null;\n\n    try {\n      const parsed = JSON.parse(cachedData);\n      return {\n        entities: asArrayOfObjects(parsed?.entities),\n      };\n    } catch {\n      localStorage.removeItem(cacheKey);\n      localStorage.removeItem(`${cacheKey}_time`);\n      return null;\n    }\n  }, [cacheKey]);\n\n  const clearCache = useCallback(() => {\n    if (!cacheKey) return;\n    localStorage.removeItem(cacheKey);\n    localStorage.removeItem(`${cacheKey}_time`);\n  }, [cacheKey]);\n\n  // Fixed the setPlatforms/setEntities naming mismatch\n  const applyBootstrap = useCallback((data) => {\n    const nextEntities = asArrayOfObjects(data?.entities);\n    setEntities(nextEntities);\n    return { nextEntities };\n  }, []);\n\n  const bootstrap = useCallback(async () => {\n    if (!loggedIn || isFetching.current) return;\n    isFetching.current = true;\n    setError(null);\n\n    const cached = readCache();\n    if (cached) {\n      setEntities(cached.entities);\n      setLoading(false);\n      setRefreshing(true);\n    } else {\n      setLoading(true);\n    }\n\n    try {\n      const data = await retryRequest(() => api.get(\"/api/users/bootstrap\"));\n      const { nextEntities } = applyBootstrap(data);\n      writeCache(nextEntities); // Fixed the variable typo here\n    } catch (err) {\n      setError(err);\n    } finally {\n      setLoading(false);\n      setRefreshing(false);\n      isFetching.current = false;\n    }\n  }, [loggedIn, readCache, applyBootstrap, writeCache]);\n\n  const refresh = useCallback(async () => {\n    if (!loggedIn || isFetching.current) return;\n    isFetching.current = true;\n    setRefreshing(true);\n\n    try {\n      const data = await retryRequest(() => api.get(\"/api/users/bootstrap\"));\n      const { nextEntities } = applyBootstrap(data);\n      writeCache(nextEntities); // Added cache write on refresh\n    } catch (err) {\n      setError(err);\n    } finally {\n      setRefreshing(false);\n      isFetching.current = false;\n    }\n  }, [loggedIn, applyBootstrap, writeCache]);\n\n  useEffect(() => {\n    if (authLoading) return;\n\n    if (!loggedIn) {\n      clearCache();\n      setEntities([]);\n      setLoading(false);\n      setRefreshing(false);\n      return;\n    }\n\n    bootstrap();\n  }, [authLoading, loggedIn, bootstrap, clearCache]);\n\n  const createEntity = useCallback(\n    async (data) => {\n      try {\n        await retryRequest(() => api.post(\"/api/entities/\", data));\n        await refresh();\n      } catch (err) {\n        setError(err);\n        throw err; // Allow form to handle local error state\n      }\n    },\n    [refresh]\n  );\n\n  const updateEntity = useCallback(async (entityId, updates) => {\n    try {\n      await retryRequest(() => api.patch(`/api/entities/${entityId}`, updates));\n      setEntities((prev) => {\n        const next = prev.map((e) => (e.id === entityId ? { ...e, ...updates } : e));\n        writeCache(next); // Keep cache synced with local updates\n        return next;\n      });\n    } catch (err) {\n      setError(err);\n    }\n  }, [writeCache]);\n\n  const deleteEntity = useCallback(async (entityId) => {\n    try {\n      await retryRequest(() => api.delete(`/api/entities/${entityId}`));\n      setEntities((prev) => {\n        const next = prev.filter((e) => e.id !== entityId);\n        writeCache(next); // Keep cache synced\n        return next;\n      });\n    } catch (err) {\n      setError(err);\n    }\n  }, [writeCache]);\n\n  const value = useMemo(\n    () => ({\n      loading,\n      refreshing,\n      entities,\n      createEntity,\n      updateEntity,\n      deleteEntity,\n      bootstrap,\n      refresh,\n      clearCache,\n      error,\n    }),\n    [\n      loading,\n      refreshing,\n      entities,\n      createEntity,\n      updateEntity,\n      deleteEntity,\n      bootstrap,\n      refresh,\n      clearCache,\n      error,\n    ]\n  );\n\n  return <DataContext.Provider value={value}>{children}</DataContext.Provider>;\n}",
+            "notes": "Template for data context or contexts",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 00:28:43.856618",
+            "updated_at": "2026-02-07 00:28:43.856623",
+            "metadata_tag": null
+        },
+        {
+            "id": 13,
+            "title": "ProtectedRoute.jsx",
+            "code": "import { Navigate, Outlet, useLocation } from \"react-router-dom\";\nimport { useAuth } from \"../hooks/useAuth\";\n\nexport function ProtectedRoute() {\n  const { user, loading } = useAuth();\n  const location = useLocation();\n\n  if (loading) return <div>Loading...</div>;\n  return user ? <Outlet /> : <Navigate to=\"/login\" state={{ from: location }} replace />;\n}",
+            "notes": "Wraps protected routes. Redirects to login if not authenticated. Remembers attempted URL.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 14:35:02.717959",
+            "updated_at": "2026-02-07 14:35:02.717963",
+            "metadata_tag": null
+        },
+        {
+            "id": 14,
+            "title": "ErrorBoundary.jsx",
+            "code": "import React from \"react\";\n\nexport class ErrorBoundary extends React.Component {\n  state = { hasError: false };\n  \n  static getDerivedStateFromError() {\n    return { hasError: true };\n  }\n  \n  render() {\n    if (this.state.hasError) {\n      return (\n        <div data-ui=\"error-page\">\n          <h1>Something went wrong</h1>\n          <button data-ui=\"btn\" onClick={() => window.location.href = \"/\"}>\n            Go Home\n          </button>\n        </div>\n      );\n    }\n    return this.props.children;\n  }\n}",
+            "notes": "Prevents app crash from component errors. Wrap <App /> in main.jsx.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 14:35:38.114330",
+            "updated_at": "2026-02-07 14:40:56.701172",
+            "metadata_tag": null
+        },
+        {
+            "id": 15,
+            "title": "ToastContainer.jsx",
+            "code": "// src/components/shared/ToastContainer.jsx\nimport { X } from \"lucide-react\";\n\nexport function ToastContainer({ toasts = [], removeToast }) {\n  if (!toasts.length) return null;\n\n  return (\n    <div data-ui=\"toast-stack\">\n      {toasts.map((t) => (\n        <div key={t.id} data-ui=\"toast\">\n          <div data-ui=\"toast-dot\" data-variant={t.type || \"info\"} />\n          <div style={{ display: \"grid\", gap: 2 }}>\n            <div data-ui=\"toast-title\">{t.title || \"Notice\"}</div>\n            <div data-ui=\"toast-msg\">{t.message || \"\"}</div>\n          </div>\n\n          <button\n            type=\"button\"\n            data-ui=\"toast-close\"\n            onClick={() => removeToast?.(t.id)}\n            aria-label=\"Dismiss\"\n            title=\"Dismiss\"\n          >\n            <X size={16} />\n          </button>\n        </div>\n      ))}\n    </div>\n  );\n}",
+            "notes": "Automatically stacks notifications in the top-right corner",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 14:40:15.135006",
+            "updated_at": "2026-02-07 14:40:15.135008",
+            "metadata_tag": null
+        },
+        {
+            "id": 16,
+            "title": "EntitySkeleton.jsx",
+            "code": "// src/components/entities/EntitySkeleton.jsx\nexport function EntitySkeleton() {\n  return (\n    <div data-ui=\"item\">\n      <div data-ui=\"row\" style={{ justifyContent: \"space-between\" }}>\n        <div style={{ display: \"grid\", gap: 6, flex: 1 }}>\n          <div\n            data-ui=\"skeleton\"\n            style={{ width: \"45%\", height: 18, borderRadius: 6 }}\n          />\n          <div\n            data-ui=\"skeleton\"\n            style={{ width: \"30%\", height: 12, borderRadius: 6 }}\n          />\n        </div>\n        <div data-ui=\"row\" style={{ gap: 8 }}>\n          <div\n            data-ui=\"skeleton\"\n            style={{ width: 70, height: 34, borderRadius: 999 }}\n          />\n          <div\n            data-ui=\"skeleton\"\n            style={{ width: 70, height: 34, borderRadius: 999 }}\n          />\n        </div>\n      </div>\n    </div>\n  );\n}",
+            "notes": "Use this in your EntitiesPage when loading is true to prevent layout shift. Show while loading data. Better UX than spinner. Styles in CSS via data-ui attributes.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 14:42:57.167234",
+            "updated_at": "2026-02-07 15:26:00.244196",
+            "metadata_tag": null
+        },
+        {
+            "id": 17,
+            "title": "index.css",
+            "code": "{\n    \"title\": \"Global CSS - Modern Lux Design System\",\n    \"code\": \"\"\":root {\n  --bg: #0f0f10;\n  --panel: #141415;\n  --panel-2: #101011;\n  --border: #242424;\n  --border-2: #2f2f2f;\n  --text: #eaeaea;\n  --muted: #9a9a9a;\n  --muted-2: #bdbdbd;\n  --primary: #2b6cb0;\n  --success: #22c55e;\n  --danger: #ef4444;\n  --warning: #f59e0b;\n  --info: #60a5fa;\n  --radius: 16px;\n  --radius-sm: 12px;\n  --shadow: 0 8px 30px rgba(0, 0, 0, 0.35);\n  --accent: var(--primary);\n  --bg-card: var(--panel);\n  --text-main: var(--text);\n  --text-dim: var(--muted);\n  --code-bg: rgba(0, 0, 0, 0.25);\n  --code-text: var(--muted-2);\n}\n\n*, *::before, *::after { box-sizing: border-box; }\n\nhtml, body { height: 100%; }\n\nbody {\n  margin: 0;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif;\n  background: var(--bg);\n  color: var(--text);\n}\n\na { color: inherit; }\nbutton, input, textarea, select { font-family: inherit; }\n\n[data-ui=\"app\"] {\n  min-height: 100vh;\n  display: flex;\n  flex-direction: column;\n}\n\n[data-ui=\"header\"] {\n  position: sticky;\n  top: 0;\n  z-index: 50;\n}\n\n[data-ui=\"main\"] {\n  flex: 1;\n  padding: 20px;\n  display: grid;\n  place-items: start center;\n}\n\n[data-ui=\"card\"] {\n  width: min(720px, 100%);\n  border: 1px solid var(--border);\n  background: var(--panel);\n  border-radius: var(--radius);\n  padding: 18px;\n  box-shadow: var(--shadow);\n}\n\n[data-ui=\"row\"] {\n  display: flex;\n  gap: 12px;\n  align-items: center;\n}\n\n[data-ui=\"stack\"] {\n  display: flex;\n  flex-direction: column;\n  gap: 12px;\n}\n\n[data-ui=\"input\"] {\n  width: 100%;\n  padding: 12px;\n  border-radius: var(--radius-sm);\n  border: 1px solid var(--border);\n  background: var(--panel-2);\n  color: var(--text);\n  outline: none;\n}\n\n[data-ui=\"input\"]:focus {\n  border-color: var(--border-2);\n}\n\n[data-ui=\"btn\"] {\n  padding: 12px 16px;\n  border-radius: var(--radius-sm);\n  border: none;\n  background: var(--primary);\n  color: #fff;\n  font-weight: 800;\n  cursor: pointer;\n  transition: all 0.2s;\n}\n\n[data-ui=\"btn\"]:hover {\n  opacity: 0.9;\n}\n\n[data-ui=\"btn\"]:disabled {\n  opacity: 0.6;\n  cursor: not-allowed;\n}\n\n[data-ui=\"navbar\"] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 14px 16px;\n  background: rgba(15, 15, 16, 0.85);\n  backdrop-filter: blur(12px);\n  border-bottom: 1px solid var(--border);\n}\n\n[data-ui=\"nav-left\"],\n[data-ui=\"nav-right\"] {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n}\n\n[data-ui=\"brand\"] {\n  font-weight: 900;\n  letter-spacing: 0.2px;\n  color: var(--text-main);\n}\n\n[data-ui=\"nav-link\"] {\n  color: var(--muted-2);\n  text-decoration: none;\n  font-weight: 700;\n  font-size: 13px;\n  display: flex;\n  align-items: center;\n  gap: 6px;\n  transition: color 0.2s;\n}\n\n[data-ui=\"nav-link\"]:hover,\n[data-ui=\"nav-link\"].active {\n  color: var(--text-main);\n}\n\n[data-ui=\"skeleton\"] {\n  background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);\n  background-size: 200% 100%;\n  animation: shimmer 1.5s infinite;\n  border-radius: 8px;\n  padding: 12px;\n  margin-bottom: 12px;\n}\n\n@keyframes shimmer {\n  0% { background-position: 200% 0; }\n  100% { background-position: -200% 0; }\n}\n\n[data-ui=\"skeleton-line\"] {\n  height: 12px;\n  background: rgba(255, 255, 255, 0.05);\n  border-radius: 4px;\n  margin: 10px 0;\n}\n\n[data-ui=\"skeleton-line\"][data-size=\"sm\"] { width: 35%; }\n[data-ui=\"skeleton-line\"][data-size=\"md\"] { width: 60%; }\n[data-ui=\"skeleton-line\"][data-size=\"lg\"] { width: 90%; }\n\n[data-ui=\"error-page\"],\n[data-ui=\"loading\"] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  min-height: 100vh;\n  gap: 1rem;\n  text-align: center;\n}\n\n[data-ui=\"title\"] {\n  font-weight: 950;\n  font-size: 18px;\n  letter-spacing: 0.2px;\n  color: var(--text-main);\n}\n\n[data-ui=\"subtitle\"] {\n  font-size: 13px;\n  color: var(--text-dim);\n}\n\n[data-ui=\"label\"] {\n  font-size: 12px;\n  font-weight: 900;\n  letter-spacing: 0.6px;\n  text-transform: uppercase;\n  color: var(--text-dim);\n}\n\n[data-ui=\"hint\"] {\n  font-size: 13px;\n  color: var(--text-dim);\n}\n\n[data-ui=\"pill\"] {\n  font-size: 12px;\n  font-weight: 900;\n  padding: 6px 10px;\n  border-radius: 999px;\n  border: 1px solid var(--border);\n  background: rgba(255, 255, 255, 0.02);\n  color: var(--text-dim);\n}\n\n[data-ui=\"chip\"] {\n  padding: 10px 12px;\n  border-radius: 999px;\n  border: 1px solid var(--border);\n  background: transparent;\n  color: var(--text);\n  font-weight: 900;\n  font-size: 12px;\n  cursor: pointer;\n  transition: all 0.2s;\n}\n\n[data-ui=\"chip\"][data-active=\"true\"] {\n  border-color: rgba(255, 255, 255, 0.18);\n  background: rgba(255, 255, 255, 0.06);\n}\n\n[data-ui=\"divider\"] {\n  height: 1px;\n  background: var(--border);\n  width: 100%;\n}\n\n[data-ui=\"item\"] {\n  border: 1px solid var(--border);\n  border-radius: var(--radius);\n  padding: 12px;\n  background: rgba(255, 255, 255, 0.02);\n  display: grid;\n  gap: 10px;\n}\n\n[data-ui=\"item-title\"] {\n  font-weight: 950;\n  color: var(--text-main);\n}\n\n[data-ui=\"item-code\"] {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;\n  font-size: 12px;\n  color: var(--code-text);\n  border: 1px solid var(--border);\n  border-radius: var(--radius-sm);\n  background: var(--code-bg);\n  padding: 10px;\n  white-space: pre-wrap;\n}\n\n[data-ui=\"btn-refresh\"] {\n  display: inline-flex;\n  align-items: center;\n  gap: 10px;\n  height: 34px;\n  padding: 0 12px;\n  border-radius: 999px;\n  cursor: pointer;\n  font-size: 12px;\n  font-weight: 950;\n  color: var(--text-main);\n  background: rgba(255, 255, 255, 0.04);\n  border: 1px solid var(--border-2);\n  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);\n  transition: all 0.16s ease;\n}\n\n[data-ui=\"btn-refresh\"]:hover:not(:disabled) {\n  transform: translateY(-1px);\n  border-color: rgba(255, 255, 255, 0.18);\n  background: rgba(255, 255, 255, 0.06);\n  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);\n}\n\n[data-ui=\"btn-refresh\"]:active:not(:disabled) {\n  transform: translateY(0);\n}\n\n[data-ui=\"btn-refresh\"]:disabled {\n  opacity: 0.55;\n  cursor: not-allowed;\n}\n\n@media (min-width: 768px) {\n  [data-ui=\"main\"] {\n    padding: 40px;\n  }\n}",
+            "notes": "Complete design system. Dark theme, glassmorphism, responsive. Copy to index.css. Uses data-ui attributes for styling.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 14:43:59.781225",
+            "updated_at": "2026-02-09 19:29:14.220130",
+            "metadata_tag": null
+        },
+        {
+            "id": 18,
+            "title": "NavBar.jsx",
+            "code": "// src/components/shared/NavBar.jsx\nimport { Link, useNavigate } from \"react-router-dom\";\nimport { useAuth } from \"../../hooks/useAuth\";\nimport { useToastTrigger } from \"../../hooks/useToast\";\n\nexport function NavBar() {\n  const nav = useNavigate();\n  const { user, logout } = useAuth();\n  const { addToast } = useToastTrigger();\n\n  function handleLogout() {\n    logout();\n    addToast({\n      type: \"success\",\n      title: \"Logged out\",\n      message: \"Session cleared.\",\n    });\n    nav(\"/login\", { replace: true });\n  }\n\n  return (\n    <div data-ui=\"navbar\">\n      <div data-ui=\"nav-left\">\n        <Link to=\"/\" data-ui=\"brand\" style={{ textDecoration: \"none\" }}>\n          // APP\n        </Link>\n\n        {user && (\n          <>\n            <Link to=\"/\" data-ui=\"nav-link\">\n              Home\n            </Link>\n            <Link to=\"/entities\" data-ui=\"nav-link\">\n              Entities\n            </Link>\n          </>\n        )}\n      </div>\n\n      <div data-ui=\"nav-right\">\n        {!user ? (\n          <>\n            <Link to=\"/login\" data-ui=\"nav-link\">\n              Login\n            </Link>\n            <Link to=\"/signup\" data-ui=\"nav-link\">\n              Signup\n            </Link>\n          </>\n        ) : (\n          <>\n            <Link to=\"/entity/new\" data-ui=\"nav-link\">\n              + Entity\n            </Link>\n\n            <button\n              type=\"button\"\n              data-ui=\"btn\"\n              style={{ width: \"auto\" }}\n              onClick={handleLogout}\n            >\n              Logout\n            </button>\n          </>\n        )}\n      </div>\n    </div>\n  );\n}",
+            "notes": "Sticky glassmorphism nav. Active link styling via NavLink. Install lucide-react for icons.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 14:45:14.515116",
+            "updated_at": "2026-02-07 15:38:09.450652",
+            "metadata_tag": null
+        },
+        {
+            "id": 20,
+            "title": "AuthContext.jsx",
+            "code": "import { createContext } from \"react\";\n\nexport const AuthContext = createContext();",
+            "notes": "Creates context object for sharing state across components. Export to use in provider and custom hook.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 15:04:06.516016",
+            "updated_at": "2026-02-07 15:04:06.516026",
+            "metadata_tag": null
+        },
+        {
+            "id": 21,
+            "title": "routes.jsx",
+            "code": "import { createBrowserRouter } from \"react-router-dom\";\n// ... imports for all pages\n\nexport const routes = createBrowserRouter([\n  {\n    path: \"/\",\n    element: <AppShell />,\n    errorElement: <ErrorPage />,\n    children: [\n      { path: \"login\", element: <LoginPage /> },\n      {\n        element: <ProtectedRoute />,\n        children: [\n          { index: true, element: <HomePage /> },\n          { path: \"ide\", element: <IdePage /> },\n          { path: \"data\", element: <VisualDashboard /> },\n        ]\n      }\n    ]\n  }\n]);",
+            "notes": "React router",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 15:06:08.582572",
+            "updated_at": "2026-02-07 15:06:08.582576",
+            "metadata_tag": null
+        },
+        {
+            "id": 22,
+            "title": "useAuth.jsx",
+            "code": "// src/hooks/useAuth.jsx\nimport { useContext } from \"react\";\nimport { AuthContext } from \"../contexts/AuthContext\";\n\nexport function useAuth() {\n  const ctx = useContext(AuthContext);\n  if (!ctx) throw new Error(\"useAuth must be used within AuthProvider\");\n  return ctx;\n}\n",
+            "notes": "Provides global access to the current user and authLoading state. Essential for guarding routes in your AppShell",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 15:07:49.001411",
+            "updated_at": "2026-02-07 15:08:19.438214",
+            "metadata_tag": null
+        },
+        {
+            "id": 23,
+            "title": "useData.jsx",
+            "code": "// src/hooks/useData.jsx\nimport { useContext } from \"react\";\nimport { DataContext } from \"../contexts/DataContext\";\n\nexport const useData = () => {\n  const context = useContext(DataContext);\n  if (!context) {\n    throw new Error(\"useData must be used within DataProvider\");\n  }\n  return context;\n};",
+            "notes": "The primary hook for interacting with your \"Cheats,\" \"Topics,\" and \"Platforms\" entities. Handles loading and refreshing states automatically.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 15:08:54.755246",
+            "updated_at": "2026-02-07 15:08:54.755251",
+            "metadata_tag": null
+        },
+        {
+            "id": 24,
+            "title": "useOnline.jsx",
+            "code": "// Create src/hooks/useOnline.jsx\nimport { useState, useEffect } from \"react\";\n\nexport function useOnline() {\n  const [isOnline, setIsOnline] = useState(navigator.onLine);\n\n  useEffect(() => {\n    const handleOnline = () => setIsOnline(true);\n    const handleOffline = () => setIsOnline(false);\n\n    window.addEventListener(\"online\", handleOnline);\n    window.addEventListener(\"offline\", handleOffline);\n\n    return () => {\n      window.removeEventListener(\"online\", handleOnline);\n      window.removeEventListener(\"offline\", handleOffline);\n    };\n  }, []);\n\n  return isOnline;\n}\n\n// Use in DataProvider:\nconst isOnline = useOnline();\n\nuseEffect(() => {\n  if (!isOnline) {\n    // Show offline banner\n    console.warn(\"You are offline. Some features may not work.\");\n  }\n}, [isOnline]);\n",
+            "notes": "Optimized by using a single toggle function. Used in the DataProvider to warn the user when the local cache cannot be synced with the server.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 15:09:25.540406",
+            "updated_at": "2026-02-07 15:09:25.540409",
+            "metadata_tag": null
+        },
+        {
+            "id": 25,
+            "title": "useToast.jsx",
+            "code": "import { useCallback, useContext, useState } from \"react\";\nimport { ToastContext } from \"../contexts/ToastContext\";\n\n/**\n * HOOK 1: useToast\n * Used ONCE at the app root level to manage the notification state.\n */\nexport function useToast() {\n  const [toasts, setToasts] = useState([]);\n\n  const addToast = useCallback((toast) => {\n    const id = Date.now() + Math.random();\n    const duration = toast?.duration ?? 3000;\n\n    const next = {\n      id,\n      type: toast?.type ?? \"info\", // e.g., 'success', 'error', 'warning'\n      title: toast?.title ?? \"Notice\",\n      message: toast?.message ?? \"\",\n      duration,\n    };\n\n    setToasts((prev) => [...prev, next]);\n\n    if (duration > 0) {\n      window.setTimeout(() => {\n        setToasts((prev) => prev.filter((t) => t.id !== id));\n      }, duration);\n    }\n  }, []);\n\n  const removeToast = useCallback((id) => {\n    setToasts((prev) => prev.filter((t) => t.id !== id));\n  }, []);\n\n  return { toasts, addToast, removeToast };\n}\n\n/**\n * HOOK 2: useToastTrigger\n * Used by ANY component to fire off a toast notification.\n */\nexport function useToastTrigger() {\n  const ctx = useContext(ToastContext);\n  if (!ctx) {\n    throw new Error(\n      \"useToastTrigger must be used within ToastContext.Provider\",\n    );\n  }\n  return ctx; // Returns { addToast }\n}\n",
+            "notes": "Separation of concerns ensures that triggering a toast doesn't force the component that fired it to re-render with the entire toast list.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 15:15:54.464861",
+            "updated_at": "2026-02-07 15:15:54.464869",
+            "metadata_tag": null
+        },
+        {
+            "id": 26,
+            "title": "SyncIndicator.jsx",
+            "code": "// src/components/common/SyncIndicator.jsx\nimport { useData } from \"../../hooks/useData\";\n\nexport function SyncIndicator() {\n  const { refreshing } = useData();\n  if (!refreshing) return null;\n\n  return (\n    <div\n      role=\"status\"\n      aria-live=\"polite\"\n      data-ui=\"sync-indicator\"\n      style={{\n        position: \"fixed\",\n        bottom: 16,\n        right: 16,\n        zIndex: 10000,\n        pointerEvents: \"none\",\n      }}\n    >\n      <div data-ui=\"toast\">\n        <div data-ui=\"toast-dot\" data-variant=\"warning\" />\n        <div style={{ display: \"grid\", gap: 2 }}>\n          <div data-ui=\"toast-title\">Syncing</div>\n          <div data-ui=\"toast-msg\">Refreshing data\u2026</div>\n        </div>\n      </div>\n    </div>\n  );\n}\n",
+            "notes": "Shows a small floating \u201cSyncing\u2026\u201d indicator only while your app is refreshing data.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 15:24:34.486255",
+            "updated_at": "2026-02-07 15:24:34.486261",
+            "metadata_tag": null
+        },
+        {
+            "id": 27,
+            "title": "HomePage.jsx",
+            "code": "// src/pages/HomePage.jsx\nimport { Link } from \"react-router-dom\";\n\nexport function HomePage() {\n  return (\n    <div\n      data-ui=\"home\"\n      style={{\n        width: \"100%\",\n        display: \"grid\",\n        justifyItems: \"center\",\n        gap: 14,\n      }}\n    >\n      <section data-ui=\"card\" style={{ width: \"min(980px, 100%)\" }}>\n        <div data-ui=\"title\">Welcome</div>\n        <div style={{ height: 10 }} />\n        <div data-ui=\"subtitle\">\n          Starter template. Replace with your content.\n        </div>\n\n        <div style={{ height: 14 }} />\n        <div data-ui=\"divider\" />\n        <div style={{ height: 14 }} />\n\n        <div data-ui=\"row\" style={{ gap: 10 }}>\n          <Link to=\"/entities\">\n            <button type=\"button\" data-ui=\"btn-refresh\">\n              <span>View Entities</span>\n            </button>\n          </Link>\n        </div>\n      </section>\n    </div>\n  );\n}",
+            "notes": "Starter template",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 15:25:15.890909",
+            "updated_at": "2026-02-07 15:25:15.890915",
+            "metadata_tag": null
+        },
+        {
+            "id": 28,
+            "title": "ErrorPage.jsx",
+            "code": "// src/pages/ErrorPage.jsx\nimport { useRouteError, useNavigate } from \"react-router-dom\";\n\nexport function ErrorPage() {\n  const error = useRouteError();\n  const navigate = useNavigate();\n\n  const status = error?.status || 500;\n  const title = error?.statusText || \"UNEXPECTED_EXCEPTION\";\n  const message =\n    error?.message ||\n    \"The app hit an unexpected error. Try reloading. If it repeats, check the console/network tab.\";\n\n  return (\n    <div\n      style={{\n        minHeight: \"70vh\",\n        display: \"grid\",\n        placeItems: \"center\",\n        padding: 16,\n      }}\n    >\n      <div data-ui=\"card\" style={{ width: \"min(820px, 100%)\" }}>\n        <div style={{ display: \"grid\", gap: 6 }}>\n          <div data-ui=\"label\">System interruption</div>\n          <div data-ui=\"title\">\n            {status} \u2014 {title}\n          </div>\n          <div data-ui=\"hint\" style={{ whiteSpace: \"pre-wrap\" }}>\n            {message}\n          </div>\n        </div>\n\n        <div style={{ height: 14 }} />\n        <div data-ui=\"divider\" />\n        <div style={{ height: 14 }} />\n\n        <div data-ui=\"row\" style={{ justifyContent: \"flex-end\", gap: 10 }}>\n          <button\n            type=\"button\"\n            data-ui=\"btn-refresh\"\n            onClick={() => navigate(\"/\")}\n          >\n            Home\n          </button>\n          <button\n            type=\"button\"\n            data-ui=\"btn-refresh\"\n            onClick={() => window.location.reload()}\n          >\n            Retry\n          </button>\n        </div>\n      </div>\n    </div>\n  );\n}",
+            "notes": "Starter template",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 15:25:41.464160",
+            "updated_at": "2026-02-07 15:25:41.464168",
+            "metadata_tag": null
+        },
+        {
+            "id": 29,
+            "title": "EntityViewModal.jsx",
+            "code": "// src/components/entities/EntityViewModal.jsx\nimport { useEffect } from \"react\";\nimport { X, Pencil, Trash2 } from \"lucide-react\";\n\nexport function EntityViewModal({\n  open,\n  onClose,\n  entity,\n  onEdit,\n  onDelete,\n}) {\n  useEffect(() => {\n    function onKey(e) {\n      if (!open) return;\n      if (e.key === \"Escape\") onClose?.();\n    }\n    window.addEventListener(\"keydown\", onKey);\n    return () => window.removeEventListener(\"keydown\", onKey);\n  }, [open, onClose]);\n\n  if (!open) return null;\n\n  return (\n    <div\n      role=\"dialog\"\n      aria-modal=\"true\"\n      onMouseDown={(e) => {\n        if (e.target === e.currentTarget) onClose?.();\n      }}\n      style={{\n        position: \"fixed\",\n        inset: 0,\n        zIndex: 10000,\n        background: \"rgba(0,0,0,0.55)\",\n        backdropFilter: \"blur(10px)\",\n        display: \"grid\",\n        placeItems: \"center\",\n        padding: 16,\n      }}\n    >\n      <div data-ui=\"card\" style={{ width: \"min(720px, 100%)\" }}>\n        <div\n          data-ui=\"row\"\n          style={{ justifyContent: \"space-between\", alignItems: \"start\" }}\n        >\n          <div style={{ display: \"grid\", gap: 6 }}>\n            <div data-ui=\"title\">{entity?.name || \"Entity\"}</div>\n            <div data-ui=\"subtitle\">Category: {entity?.category || \"None\"}</div>\n          </div>\n\n          <button type=\"button\" data-ui=\"btn-refresh\" onClick={onClose}>\n            <X size={16} />\n            <span>Close</span>\n          </button>\n        </div>\n\n        <div style={{ height: 12 }} />\n        <div data-ui=\"divider\" />\n        <div style={{ height: 12 }} />\n\n        <div style={{ display: \"grid\", gap: 12 }}>\n          <div data-ui=\"item\">\n            <div data-ui=\"label\">Name</div>\n            <div data-ui=\"hint\">{entity?.name || \"\u2014\"}</div>\n          </div>\n\n          <div data-ui=\"item\">\n            <div data-ui=\"label\">Category</div>\n            <div data-ui=\"hint\">{entity?.category || \"\u2014\"}</div>\n          </div>\n\n          <div\n            data-ui=\"row\"\n            style={{ justifyContent: \"flex-end\", gap: 10, flexWrap: \"wrap\" }}\n          >\n            <button\n              type=\"button\"\n              data-ui=\"btn-refresh\"\n              onClick={onEdit}\n              disabled={!entity?.id}\n            >\n              <Pencil size={16} />\n              <span>Edit</span>\n            </button>\n\n            <button\n              type=\"button\"\n              data-ui=\"btn-refresh\"\n              onClick={onDelete}\n              disabled={!entity?.id}\n            >\n              <Trash2 size={16} />\n              <span>Delete</span>\n            </button>\n          </div>\n        </div>\n      </div>\n    </div>\n  );\n}",
+            "notes": "Displays an entity in read-only mode with options to edit or delete.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 15:27:33.700577",
+            "updated_at": "2026-02-07 15:27:33.700579",
+            "metadata_tag": null
+        },
+        {
+            "id": 30,
+            "title": "EntityModal.jsx",
+            "code": "// src/components/entities/EntityModal.jsx\nimport { useEffect, useState } from \"react\";\nimport { X } from \"lucide-react\";\nimport { useData } from \"../../hooks/useData\";\nimport { useToastTrigger } from \"../../hooks/useToast\";\n\nexport function EntityModal({ open, onClose, mode, entity }) {\n  const { createEntity, updateEntity } = useData();\n  const { addToast } = useToastTrigger();\n\n  const inEditMode = mode === \"edit\" && entity?.id;\n\n  const [saving, setSaving] = useState(false);\n  const [err, setErr] = useState(null);\n  const [formData, setFormData] = useState({\n    name: \"\",\n    category: \"\",\n  });\n\n  useEffect(() => {\n    if (!open) return;\n\n    const newInitial = inEditMode && entity\n      ? {\n          name: entity.name ?? \"\",\n          category: entity.category ?? \"\",\n        }\n      : {\n          name: \"\",\n          category: \"\",\n        };\n\n    setFormData(newInitial);\n    setErr(null);\n    setSaving(false);\n  }, [open]);\n\n  useEffect(() => {\n    function onKey(e) {\n      if (e.key === \"Escape\" && open) onClose?.();\n    }\n    window.addEventListener(\"keydown\", onKey);\n    return () => window.removeEventListener(\"keydown\", onKey);\n  }, [open, onClose]);\n\n  if (!open) return null;\n\n  const onChange = (e) => {\n    const { name, value } = e.target;\n    setFormData((p) => ({ ...p, [name]: value }));\n  };\n\n  const canSave = Boolean(formData.name.trim()) && !saving;\n\n  const onSubmit = async (e) => {\n    e.preventDefault();\n    setErr(null);\n\n    if (!formData.name.trim()) return setErr(\"Name is required.\");\n\n    setSaving(true);\n    try {\n      if (inEditMode) {\n        await updateEntity(entity.id, formData);\n        addToast({\n          type: \"success\",\n          title: \"Updated\",\n          message: \"Entity updated.\",\n        });\n      } else {\n        await createEntity(formData);\n        addToast({\n          type: \"success\",\n          title: \"Created\",\n          message: \"Entity created.\",\n        });\n      }\n      onClose?.();\n    } catch (x) {\n      const msg = x?.message || \"Save failed.\";\n      setErr(msg);\n      addToast({ type: \"error\", title: \"Save failed\", message: msg });\n    } finally {\n      setSaving(false);\n    }\n  };\n\n  return (\n    <div\n      role=\"dialog\"\n      aria-modal=\"true\"\n      onMouseDown={(e) => {\n        if (e.target === e.currentTarget) onClose?.();\n      }}\n      style={{\n        position: \"fixed\",\n        inset: 0,\n        zIndex: 9999,\n        background: \"rgba(0,0,0,0.55)\",\n        backdropFilter: \"blur(8px)\",\n        display: \"grid\",\n        placeItems: \"center\",\n        padding: 16,\n      }}\n    >\n      <div data-ui=\"card\" style={{ width: \"min(720px, 100%)\" }}>\n        <div\n          data-ui=\"row\"\n          style={{ justifyContent: \"space-between\", alignItems: \"start\" }}\n        >\n          <div style={{ display: \"grid\", gap: 6 }}>\n            <div data-ui=\"title\">{inEditMode ? \"Edit Entity\" : \"New Entity\"}</div>\n            <div data-ui=\"subtitle\">Clean. Fast. Keyboard-first.</div>\n          </div>\n\n          <button\n            type=\"button\"\n            data-ui=\"btn-refresh\"\n            onClick={onClose}\n            disabled={saving}\n            title=\"Close\"\n          >\n            <X size={16} />\n            <span>Close</span>\n          </button>\n        </div>\n\n        <div style={{ height: 12 }} />\n        <div data-ui=\"divider\" />\n        <div style={{ height: 12 }} />\n\n        <form onSubmit={onSubmit} style={{ display: \"grid\", gap: 12 }}>\n          <label style={{ display: \"grid\", gap: 6 }}>\n            <span data-ui=\"label\">Name</span>\n            <input\n              data-ui=\"input\"\n              name=\"name\"\n              value={formData.name}\n              onChange={onChange}\n              disabled={saving}\n              placeholder=\"Entity name\"\n            />\n          </label>\n\n          <label style={{ display: \"grid\", gap: 6 }}>\n            <span data-ui=\"label\">Category</span>\n            <input\n              data-ui=\"input\"\n              name=\"category\"\n              value={formData.category}\n              onChange={onChange}\n              disabled={saving}\n              placeholder=\"Optional category\"\n            />\n          </label>\n\n          {err ? (\n            <div data-ui=\"empty\">\n              <div data-ui=\"empty-title\">Fix this</div>\n              <div data-ui=\"hint\">{err}</div>\n            </div>\n          ) : null}\n\n          <div data-ui=\"row\" style={{ justifyContent: \"flex-end\", gap: 10 }}>\n            <button\n              type=\"button\"\n              data-ui=\"btn-refresh\"\n              onClick={onClose}\n              disabled={saving}\n            >\n              Cancel\n            </button>\n\n            <button type=\"submit\" data-ui=\"btn-refresh\" disabled={!canSave}>\n              {saving ? \"Saving\u2026\" : inEditMode ? \"Update\" : \"Create\"}\n            </button>\n          </div>\n        </form>\n      </div>\n    </div>\n  );\n}",
+            "notes": "Provides a form to create a new entity or update an existing one.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 15:27:52.509247",
+            "updated_at": "2026-02-07 15:27:52.509250",
+            "metadata_tag": null
+        },
+        {
+            "id": 31,
+            "title": "EntityItem.jsx",
+            "code": "// src/components/entities/EntityItem.jsx\nimport { Eye, Pencil } from \"lucide-react\";\n\nexport function EntityItem({ entity, onView, onEdit }) {\n  return (\n    <div data-ui=\"item\">\n      <div\n        data-ui=\"row\"\n        style={{ justifyContent: \"space-between\", alignItems: \"start\" }}\n      >\n        <div style={{ display: \"grid\", gap: 4 }}>\n          <div data-ui=\"item-title\">{entity.name}</div>\n          <div data-ui=\"item-meta\">Category: {entity.category || \"None\"}</div>\n        </div>\n\n        <div data-ui=\"row\" style={{ gap: 8 }}>\n          <button\n            type=\"button\"\n            data-ui=\"btn-refresh\"\n            onClick={onView}\n            title=\"View\"\n          >\n            <Eye size={16} />\n            <span>View</span>\n          </button>\n          <button\n            type=\"button\"\n            data-ui=\"btn-refresh\"\n            onClick={onEdit}\n            title=\"Edit\"\n          >\n            <Pencil size={16} />\n            <span>Edit</span>\n          </button>\n        </div>\n      </div>\n    </div>\n  );\n}",
+            "notes": "Starter template",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 15:28:17.066232",
+            "updated_at": "2026-02-07 15:28:17.066236",
+            "metadata_tag": null
+        },
+        {
+            "id": 32,
+            "title": "EntityPage.jsx",
+            "code": "// src/pages/EntityPage.jsx\nimport { useEffect, useMemo, useRef, useState } from \"react\";\nimport { useData } from \"../hooks/useData\";\nimport { RefreshCw, Search, Plus } from \"lucide-react\";\nimport { EntityItem } from \"../components/entities/EntityItem\";\nimport { EntityModal } from \"../components/entities/EntityModal\";\nimport { EntityViewModal } from \"../components/entities/EntityViewModal\";\nimport { EntitySkeleton } from \"../components/entities/EntitySkeleton\";\n\nconst PAGE_SIZE = 10;\n\nexport function EntityPage() {\n  const {\n    loading,\n    refreshing,\n    entities = [],\n    deleteEntity,\n    refresh,\n  } = useData();\n\n  const [q, setQ] = useState(\"\");\n  const [categoryFilter, setCategoryFilter] = useState(\"\");\n  const [page, setPage] = useState(1);\n\n  const [editOpen, setEditOpen] = useState(false);\n  const [editingId, setEditingId] = useState(null);\n\n  const [viewOpen, setViewOpen] = useState(false);\n  const [viewingId, setViewingId] = useState(null);\n\n  const isBusy = loading || refreshing;\n  const searchRef = useRef(null);\n\n  useEffect(() => {\n    function onKeyDown(e) {\n      const key = e.key.toLowerCase();\n\n      if (key === \"/\") {\n        if (\n          document.activeElement?.tagName === \"INPUT\" ||\n          document.activeElement?.tagName === \"TEXTAREA\"\n        ) {\n          return;\n        }\n        e.preventDefault();\n        searchRef.current?.focus?.();\n        return;\n      }\n\n      if (key === \"n\") {\n        if (\n          editOpen ||\n          viewOpen ||\n          document.activeElement?.tagName === \"INPUT\" ||\n          document.activeElement?.tagName === \"TEXTAREA\"\n        ) {\n          return;\n        }\n        e.preventDefault();\n        openNew();\n        return;\n      }\n\n      if (key === \"escape\") {\n        if (viewOpen) closeView();\n        if (editOpen) closeEditor();\n      }\n    }\n\n    window.addEventListener(\"keydown\", onKeyDown);\n    return () => window.removeEventListener(\"keydown\", onKeyDown);\n  }, [editOpen, viewOpen]);\n\n  useEffect(() => {\n    setPage(1);\n  }, [q, categoryFilter]);\n\n  const categories = useMemo(() => {\n    const set = new Set();\n    (entities || []).forEach((e) => {\n      if (e?.category) set.add(e.category);\n    });\n    return Array.from(set).sort();\n  }, [entities]);\n\n  const filtered = useMemo(() => {\n    const text = q.trim().toLowerCase();\n    const cat = categoryFilter.trim().toLowerCase();\n\n    return (Array.isArray(entities) ? entities : []).filter((e) => {\n      const name = String(e?.name || \"\").toLowerCase();\n      const category = String(e?.category || \"\").toLowerCase();\n\n      if (text && !name.includes(text)) return false;\n      if (cat && category !== cat) return false;\n\n      return true;\n    });\n  }, [entities, q, categoryFilter]);\n\n  const totalPages = useMemo(() => {\n    const n = filtered.length;\n    return Math.max(1, Math.ceil(n / PAGE_SIZE));\n  }, [filtered.length]);\n\n  const pageItems = useMemo(() => {\n    const start = (page - 1) * PAGE_SIZE;\n    return filtered.slice(start, start + PAGE_SIZE);\n  }, [filtered, page]);\n\n  const editingEntity = useMemo(() => {\n    if (!editingId) return null;\n    return (\n      (Array.isArray(entities) ? entities : []).find((e) => e.id === editingId) || null\n    );\n  }, [editingId, entities]);\n\n  const viewingEntity = useMemo(() => {\n    if (!viewingId) return null;\n    return (\n      (Array.isArray(entities) ? entities : []).find((e) => e.id === viewingId) || null\n    );\n  }, [viewingId, entities]);\n\n  function clearFilters() {\n    setQ(\"\");\n    setCategoryFilter(\"\");\n    setPage(1);\n  }\n\n  function openNew() {\n    setEditingId(null);\n    setEditOpen(true);\n  }\n\n  function openEdit(id) {\n    setEditingId(id);\n    setEditOpen(true);\n  }\n\n  function closeEditor() {\n    setEditOpen(false);\n    setEditingId(null);\n  }\n\n  function openView(id) {\n    setViewingId(id);\n    setViewOpen(true);\n  }\n\n  function closeView() {\n    setViewOpen(false);\n    setViewingId(null);\n  }\n\n  function nextPage() {\n    setPage((p) => Math.min(totalPages, p + 1));\n  }\n\n  function prevPage() {\n    setPage((p) => Math.max(1, p - 1));\n  }\n\n  return (\n    <div\n      data-ui=\"home\"\n      style={{\n        width: \"100%\",\n        display: \"grid\",\n        justifyItems: \"center\",\n        gap: 14,\n      }}\n    >\n      <section data-ui=\"card\" style={{ width: \"min(980px, 100%)\" }}>\n        <div\n          data-ui=\"row\"\n          style={{ justifyContent: \"space-between\", flexWrap: \"wrap\" }}\n        >\n          <div style={{ display: \"grid\", gap: 6 }}>\n            <div data-ui=\"title\">Entities</div>\n            <div data-ui=\"subtitle\">\n              <span data-ui=\"pill\">/</span> search \u2022 <span data-ui=\"pill\">N</span> new \u2022 <span data-ui=\"pill\">\u2190/\u2192</span> page\n            </div>\n          </div>\n\n          <div data-ui=\"row\" style={{ gap: 10 }}>\n            <div\n              data-ui=\"pill\"\n              data-variant={loading ? \"info\" : refreshing ? \"warning\" : \"success\"}\n            >\n              {loading ? \"Loading\u2026\" : refreshing ? \"Syncing\u2026\" : \"Ready\"}\n            </div>\n\n            <button\n              data-ui=\"btn-refresh\"\n              onClick={refresh}\n              disabled={isBusy}\n              title=\"Force refresh\"\n            >\n              <RefreshCw\n                size={16}\n                data-ui=\"btn-icon\"\n                data-spin={refreshing ? \"true\" : \"false\"}\n              />\n              <span>{refreshing ? \"Refreshing\" : \"Refresh\"}</span>\n            </button>\n\n            <button\n              data-ui=\"btn-refresh\"\n              onClick={openNew}\n              disabled={isBusy}\n              title=\"New entity (N)\"\n            >\n              <Plus size={16} />\n              <span>New</span>\n            </button>\n          </div>\n        </div>\n\n        <div style={{ height: 14 }} />\n\n        <div data-ui=\"row\" style={{ gap: 10, alignItems: \"stretch\" }}>\n          <div style={{ position: \"relative\", flex: 1 }}>\n            <Search\n              size={16}\n              style={{ position: \"absolute\", left: 12, top: 12, opacity: 0.7 }}\n            />\n            <input\n              ref={searchRef}\n              data-ui=\"input\"\n              value={q}\n              onChange={(e) => setQ(e.target.value)}\n              placeholder=\"Search by name\u2026  ( / )\"\n              style={{ paddingLeft: 38 }}\n              disabled={loading}\n            />\n          </div>\n\n          <select\n            data-ui=\"input\"\n            value={categoryFilter}\n            onChange={(e) => setCategoryFilter(e.target.value)}\n            disabled={loading}\n            style={{ width: 200 }}\n          >\n            <option value=\"\">All Categories</option>\n            {categories.map((cat) => (\n              <option key={cat} value={cat}>\n                {cat}\n              </option>\n            ))}\n          </select>\n\n          <button\n            data-ui=\"btn-refresh\"\n            onClick={clearFilters}\n            disabled={loading}\n            title=\"Clear filters\"\n          >\n            <span>Clear</span>\n          </button>\n        </div>\n      </section>\n\n      <section data-ui=\"card\" style={{ width: \"min(980px, 100%)\" }}>\n        <div\n          data-ui=\"row\"\n          style={{ justifyContent: \"space-between\", flexWrap: \"wrap\" }}\n        >\n          <div style={{ display: \"grid\", gap: 4 }}>\n            <div data-ui=\"label\">Results</div>\n            <div data-ui=\"hint\">\n              {isBusy ? \"Loading\u2026\" : `${filtered.length} entities`}\n              {q.trim() ? ` \u2022 matching \"${q.trim()}\"` : \"\"}\n            </div>\n          </div>\n\n          <div data-ui=\"row\" style={{ gap: 10 }}>\n            <button\n              data-ui=\"btn-refresh\"\n              onClick={prevPage}\n              disabled={loading || page <= 1}\n              title=\"Previous page (\u2190)\"\n            >\n              <span>Prev</span>\n            </button>\n\n            <div data-ui=\"pill\" data-variant=\"info\">\n              Page {page} / {totalPages}\n            </div>\n\n            <button\n              data-ui=\"btn-refresh\"\n              onClick={nextPage}\n              disabled={loading || page >= totalPages}\n              title=\"Next page (\u2192)\"\n            >\n              <span>Next</span>\n            </button>\n          </div>\n        </div>\n\n        <div style={{ height: 12 }} />\n\n        {isBusy ? (\n          <div data-ui=\"stack\">\n            {Array.from({ length: 6 }).map((_, i) => (\n              <EntitySkeleton key={i} />\n            ))}\n          </div>\n        ) : pageItems.length ? (\n          <div data-ui=\"stack\">\n            {pageItems.map((e) => (\n              <EntityItem\n                key={e.id}\n                entity={e}\n                onView={() => openView(e.id)}\n                onEdit={() => openEdit(e.id)}\n              />\n            ))}\n          </div>\n        ) : (\n          <div data-ui=\"empty\">\n            <div data-ui=\"empty-title\">No matches</div>\n            <div data-ui=\"hint\">Try clearing filters or create a new entity.</div>\n          </div>\n        )}\n      </section>\n\n      <EntityViewModal\n        open={viewOpen}\n        onClose={closeView}\n        entity={viewingEntity}\n        onEdit={() => {\n          if (!viewingId) return;\n          closeView();\n          openEdit(viewingId);\n        }}\n        onDelete={async () => {\n          if (!confirm(`Delete \"${viewingEntity.name}\"?`)) return;\n          await deleteEntity(viewingEntity.id);\n          closeView();\n        }}\n      />\n\n      <EntityModal\n        open={editOpen}\n        onClose={closeEditor}\n        mode={editingId ? \"edit\" : \"new\"}\n        entity={editingEntity}\n      />\n    </div>\n  );\n}",
+            "notes": "Starter template",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 15:28:54.855463",
+            "updated_at": "2026-02-07 15:28:54.855468",
+            "metadata_tag": null
+        },
+        {
+            "id": 33,
+            "title": "EntityForm.jsx",
+            "code": "// src/components/entities/EntityForm.jsx\nimport { useEffect, useMemo, useState } from \"react\";\nimport { useNavigate, useParams } from \"react-router-dom\";\nimport { ArrowLeft, Save, X } from \"lucide-react\";\nimport { useData } from \"../../hooks/useData\";\nimport { useToastTrigger } from \"../../hooks/useToast\";\n\nexport function EntityForm() {\n  const { id } = useParams();\n  const nav = useNavigate();\n  const { addToast } = useToastTrigger();\n\n  const entityId = useMemo(() => {\n    const n = Number(id);\n    return Number.isFinite(n) ? n : null;\n  }, [id]);\n\n  const inEditMode = Boolean(entityId);\n\n  const {\n    entities = [],\n    createEntity,\n    updateEntity,\n  } = useData();\n\n  const editingEntity = useMemo(() => {\n    if (!inEditMode) return null;\n    return (\n      (Array.isArray(entities) ? entities : []).find((e) => e.id === entityId) ||\n      null\n    );\n  }, [inEditMode, entityId, entities]);\n\n  const [saving, setSaving] = useState(false);\n  const [err, setErr] = useState(null);\n\n  const initial = useMemo(() => {\n    if (inEditMode && editingEntity) {\n      return {\n        name: editingEntity.name ?? \"\",\n        category: editingEntity.category ?? \"\",\n      };\n    }\n    return {\n      name: \"\",\n      category: \"\",\n    };\n  }, [inEditMode, editingEntity]);\n\n  const [formData, setFormData] = useState(initial);\n\n  useEffect(() => {\n    setFormData(initial);\n    setErr(null);\n    setSaving(false);\n  }, [initial]);\n\n  useEffect(() => {\n    function onKey(e) {\n      if (e.key === \"Escape\") nav(\"/entities\");\n    }\n    window.addEventListener(\"keydown\", onKey);\n    return () => window.removeEventListener(\"keydown\", onKey);\n  }, [nav]);\n\n  const onChange = (e) => {\n    const { name, value } = e.target;\n    setFormData((p) => ({\n      ...p,\n      [name]: value,\n    }));\n  };\n\n  const canSave = Boolean(formData.name.trim()) && !saving;\n\n  const onSubmit = async (e) => {\n    e.preventDefault();\n    setErr(null);\n\n    if (!formData.name.trim()) return setErr(\"Name is required.\");\n\n    setSaving(true);\n    try {\n      if (inEditMode) {\n        await updateEntity(entityId, formData);\n        addToast({\n          type: \"success\",\n          title: \"Updated\",\n          message: \"Entity saved.\",\n        });\n      } else {\n        await createEntity(formData);\n        addToast({\n          type: \"success\",\n          title: \"Created\",\n          message: \"Entity created.\",\n        });\n      }\n\n      nav(\"/entities\");\n    } catch (x) {\n      const msg = x?.message || \"Save failed.\";\n      setErr(msg);\n      addToast({ type: \"error\", title: \"Save failed\", message: msg });\n    } finally {\n      setSaving(false);\n    }\n  };\n\n  if (inEditMode && !editingEntity) {\n    return (\n      <div\n        data-ui=\"card\"\n        style={{ width: \"min(980px, 100%)\", margin: \"0 auto\" }}\n      >\n        <div data-ui=\"title\">Entity not found</div>\n        <div style={{ height: 10 }} />\n        <button\n          data-ui=\"btn-refresh\"\n          type=\"button\"\n          onClick={() => nav(\"/entities\")}\n        >\n          <ArrowLeft size={16} />\n          <span>Back</span>\n        </button>\n      </div>\n    );\n  }\n\n  return (\n    <div style={{ width: \"min(980px, 100%)\", margin: \"0 auto\", padding: 14 }}>\n      <section data-ui=\"card\">\n        <div\n          data-ui=\"row\"\n          style={{ justifyContent: \"space-between\", flexWrap: \"wrap\" }}\n        >\n          <div style={{ display: \"grid\", gap: 6 }}>\n            <div data-ui=\"title\">\n              {inEditMode ? \"Edit Entity\" : \"New Entity\"}\n            </div>\n            <div data-ui=\"subtitle\">Clean. Fast. Keyboard-first.</div>\n          </div>\n\n          <div data-ui=\"row\" style={{ gap: 10 }}>\n            <button\n              data-ui=\"btn-refresh\"\n              type=\"button\"\n              onClick={() => nav(\"/entities\")}\n              disabled={saving}\n              title=\"Cancel (Esc)\"\n            >\n              <X size={16} />\n              <span>Cancel</span>\n            </button>\n          </div>\n        </div>\n\n        <div style={{ height: 14 }} />\n        <div data-ui=\"divider\" />\n        <div style={{ height: 12 }} />\n\n        <form onSubmit={onSubmit} style={{ display: \"grid\", gap: 12 }}>\n          <label style={{ display: \"grid\", gap: 6 }}>\n            <span data-ui=\"label\">Name</span>\n            <input\n              data-ui=\"input\"\n              name=\"name\"\n              value={formData.name}\n              onChange={onChange}\n              disabled={saving}\n              placeholder=\"Entity name\"\n            />\n          </label>\n\n          <label style={{ display: \"grid\", gap: 6 }}>\n            <span data-ui=\"label\">Category</span>\n            <input\n              data-ui=\"input\"\n              name=\"category\"\n              value={formData.category}\n              onChange={onChange}\n              disabled={saving}\n              placeholder=\"Optional category\"\n            />\n          </label>\n\n          {err ? (\n            <div data-ui=\"empty\">\n              <div data-ui=\"empty-title\">Fix this</div>\n              <div data-ui=\"hint\">{err}</div>\n            </div>\n          ) : null}\n\n          <div\n            data-ui=\"row\"\n            style={{ gap: 10, justifyContent: \"flex-end\", flexWrap: \"wrap\" }}\n          >\n            <button\n              type=\"button\"\n              data-ui=\"btn-refresh\"\n              onClick={() => nav(\"/entities\")}\n              disabled={saving}\n            >\n              <X size={16} />\n              <span>Cancel</span>\n            </button>\n\n            <button type=\"submit\" data-ui=\"btn-refresh\" disabled={!canSave}>\n              <Save size={16} />\n              <span>\n                {saving ? \"Saving\u2026\" : inEditMode ? \"Update\" : \"Create\"}\n              </span>\n            </button>\n          </div>\n        </form>\n      </section>\n    </div>\n  );\n}",
+            "notes": "Starter template",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 15:29:54.767908",
+            "updated_at": "2026-02-07 15:29:54.767911",
+            "metadata_tag": null
+        },
+        {
+            "id": 34,
+            "title": "useLocalStorage.js",
+            "code": "// src/hooks/useLocalStorage.js\nimport { useState, useEffect } from \"react\";\n\nexport function useLocalStorage(key, initialValue) {\n  const [value, setValue] = useState(() => {\n    try {\n      const item = localStorage.getItem(key);\n      return item ? JSON.parse(item) : initialValue;\n    } catch {\n      return initialValue;\n    }\n  });\n\n  useEffect(() => {\n    try {\n      localStorage.setItem(key, JSON.stringify(value));\n    } catch (error) {\n      console.error(\"Failed to save to localStorage:\", error);\n    }\n  }, [key, value]);\n\n  return [value, setValue];\n}",
+            "notes": "A hook that remembers things even after you refresh the page. React state + browser memory combined.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 15:34:17.972887",
+            "updated_at": "2026-02-07 15:34:25.788812",
+            "metadata_tag": null
+        },
+        {
+            "id": 35,
+            "title": "useDebounce.js",
+            "code": "// src/hooks/useDebounce.js\nimport { useState, useEffect } from \"react\";\n\nexport function useDebounce(value, delay = 300) {\n  const [debouncedValue, setDebouncedValue] = useState(value);\n\n  useEffect(() => {\n    const timer = setTimeout(() => setDebouncedValue(value), delay);\n    return () => clearTimeout(timer);\n  }, [value, delay]);\n\n  return debouncedValue;\n}",
+            "notes": "A hook that waits before doing something. ex: Instead of searching on every letter,iIt waits until you stop typing for 300ms.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 15:35:10.190340",
+            "updated_at": "2026-02-07 15:35:10.190346",
+            "metadata_tag": null
+        },
+        {
+            "id": 36,
+            "title": "utils/storage.js",
+            "code": "// src/utils/storage.js\n\nexport function getItem(key, fallback = null) {\n  try {\n    const item = localStorage.getItem(key);\n    return item ? JSON.parse(item) : fallback;\n  } catch {\n    return fallback;\n  }\n}\n\nexport function setItem(key, value) {\n  try {\n    localStorage.setItem(key, JSON.stringify(value));\n    return true;\n  } catch {\n    return false;\n  }\n}\n\nexport function removeItem(key) {\n  try {\n    localStorage.removeItem(key);\n    return true;\n  } catch {\n    return false;\n  }\n}\n\nexport function clear() {\n  try {\n    localStorage.clear();\n    return true;\n  } catch {\n    return false;\n  }\n}",
+            "notes": "Small helper file that safely talks to the browser\u2019s storage. localStorage.setItem(\"theme\", JSON.stringify(value)) ==> storage.set(\"theme\", value);",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 15:36:06.969894",
+            "updated_at": "2026-02-07 15:36:06.969895",
+            "metadata_tag": null
+        },
+        {
+            "id": 37,
+            "title": "ToastContext.jsx",
+            "code": "// src/contexts/ToastContext.jsx\nimport { createContext } from \"react\";\n\nexport const ToastContext = createContext(null);",
+            "notes": "Toast context",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 15:40:01.299022",
+            "updated_at": "2026-02-07 15:40:01.299024",
+            "metadata_tag": null
+        },
+        {
+            "id": 38,
+            "title": "LoginPage.jsx",
+            "code": "// src/pages/LoginPage.jsx\nimport { useState } from \"react\";\nimport { Link, useNavigate, useLocation } from \"react-router-dom\";\nimport { useToastTrigger } from \"../hooks/useToast\";\nimport { useAuth } from \"../hooks/useAuth\";\nimport { GlobeLock } from \"lucide-react\";\n\nexport function LoginPage() {\n  const nav = useNavigate();\n  const location = useLocation();\n  const { addToast } = useToastTrigger();\n  const { login } = useAuth();\n\n  const [email, setEmail] = useState(\"\");\n  const [password, setPassword] = useState(\"\");\n  const [submitting, setSubmitting] = useState(false);\n\n  async function onSubmit(e) {\n    e.preventDefault();\n    if (submitting) return;\n\n    setSubmitting(true);\n    try {\n      if (!email || !password) {\n        addToast({\n          type: \"error\",\n          title: \"Missing info\",\n          message: \"Enter email and password.\",\n        });\n        return;\n      }\n\n      const result = await login({ email, password });\n\n      if (!result.success) {\n        addToast({\n          type: \"error\",\n          title: \"Login failed\",\n          message: result.error || \"Unauthorized\",\n        });\n        return;\n      }\n\n      addToast({\n        type: \"success\",\n        title: \"Welcome back\",\n        message: \"Logged in.\",\n      });\n\n      const dest = location.state?.from || \"/\";\n      nav(dest, { replace: true });\n    } finally {\n      setSubmitting(false);\n    }\n  }\n\n  return (\n    <div data-ui=\"auth-page\">\n      <form data-ui=\"auth-form\" onSubmit={onSubmit}>\n        <div data-ui=\"auth-header\">\n          <div data-ui=\"row\" style={{ justifyContent: \"center\", gap: 10 }}>\n            <button\n              type=\"button\"\n              onClick={() => {\n                setEmail(\"josh@josh.com\");\n                setPassword(\"1111\");\n              }}\n              title=\"Auto-fill demo credentials\"\n              style={{\n                background: \"transparent\",\n                border: \"none\",\n                padding: 0,\n                cursor: \"pointer\",\n                display: \"flex\",\n                alignItems: \"center\",\n              }}\n            >\n              <GlobeLock\n                size={22}\n                stroke=\"var(--text-main)\"\n                strokeWidth={1.8}\n              />\n            </button>\n\n            <div data-ui=\"title\" style={{ fontSize: 22 }}>\n              Bagger\n            </div>\n          </div>\n\n          <div data-ui=\"auth-subtitle\">Authenticate session</div>\n        </div>\n\n        <div data-ui=\"stack\">\n          <input\n            data-ui=\"input\"\n            type=\"email\"\n            placeholder=\"Email\"\n            autoComplete=\"email\"\n            value={email}\n            onChange={(e) => setEmail(e.target.value)}\n          />\n          <input\n            data-ui=\"input\"\n            type=\"password\"\n            placeholder=\"Password\"\n            autoComplete=\"current-password\"\n            value={password}\n            onChange={(e) => setPassword(e.target.value)}\n          />\n\n          <button data-ui=\"btn\" type=\"submit\" disabled={submitting}>\n            {submitting ? \"Signing in\u2026\" : \"Authorize\"}\n          </button>\n        </div>\n\n        <div data-ui=\"auth-footer\">\n          New here?{\" \"}\n          <Link\n            to=\"/signup\"\n            style={{ color: \"var(--accent)\", fontWeight: 900 }}\n          >\n            Create account\n          </Link>\n        </div>\n      </form>\n    </div>\n  );\n}\n",
+            "notes": "Login page template",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 15:41:07.110878",
+            "updated_at": "2026-02-07 15:41:07.110881",
+            "metadata_tag": null
+        },
+        {
+            "id": 39,
+            "title": "SignupPage.jsx",
+            "code": "import { useEffect, useState } from \"react\";\nimport { Link, useNavigate } from \"react-router-dom\";\nimport { useToastTrigger } from \"../hooks/useToast\";\nimport { useAuth } from \"../hooks/useAuth\";\nimport { UserPlus } from \"lucide-react\";\n\nexport function SignupPage() {\n  const nav = useNavigate();\n  const { addToast } = useToastTrigger();\n  const { signup, user } = useAuth();\n\n  const [name, setName] = useState(\"\");\n  const [email, setEmail] = useState(\"\");\n  const [password, setPassword] = useState(\"\");\n  const [submitting, setSubmitting] = useState(false);\n\n  useEffect(() => {\n    if (user) nav(\"/\", { replace: true });\n  }, [user, nav]);\n\n  async function onSubmit(e) {\n    e.preventDefault();\n    if (submitting) return;\n\n    setSubmitting(true);\n    try {\n      if (!name || !email || !password) {\n        addToast({\n          type: \"error\",\n          title: \"Missing info\",\n          message: \"Enter name, email, and password.\",\n        });\n        return;\n      }\n\n      const result = await signup({ name, email, password });\n\n      if (!result?.success) {\n        addToast({\n          type: \"error\",\n          title: \"Signup failed\",\n          message: result?.error || \"Unable to create account.\",\n        });\n        return;\n      }\n\n      addToast({\n        type: \"success\",\n        title: \"Account created\",\n        message: \"You\u2019re in.\",\n      });\n      nav(\"/\", { replace: true });\n    } finally {\n      setSubmitting(false);\n    }\n  }\n\n  return (\n    <div data-ui=\"auth-page\">\n      <form data-ui=\"auth-form\" onSubmit={onSubmit}>\n        <div data-ui=\"auth-header\">\n          <div data-ui=\"row\" style={{ justifyContent: \"center\", gap: 10 }}>\n            <button\n              type=\"button\"\n              onClick={() => {\n                setName(\"Josh\");\n                setEmail(\"josh@josh.com\");\n                setPassword(\"1111\");\n              }}\n              title=\"Auto-fill demo credentials\"\n              style={{\n                background: \"transparent\",\n                border: \"none\",\n                padding: 0,\n                cursor: \"pointer\",\n                display: \"flex\",\n                alignItems: \"center\",\n                opacity: 0.35,\n              }}\n              onMouseEnter={(e) => (e.currentTarget.style.opacity = \"1\")}\n              onMouseLeave={(e) => (e.currentTarget.style.opacity = \"0.35\")}\n            >\n              <UserPlus size={22} stroke=\"var(--text-main)\" strokeWidth={1.8} />\n            </button>\n\n            <div data-ui=\"title\" style={{ fontSize: 22 }}>\n              Bagger\n            </div>\n          </div>\n\n          <div data-ui=\"auth-subtitle\">Create credentials</div>\n        </div>\n\n        <div data-ui=\"stack\">\n          <input\n            data-ui=\"input\"\n            type=\"text\"\n            placeholder=\"Name\"\n            autoComplete=\"name\"\n            value={name}\n            onChange={(e) => setName(e.target.value)}\n          />\n          <input\n            data-ui=\"input\"\n            type=\"email\"\n            placeholder=\"Email\"\n            autoComplete=\"email\"\n            value={email}\n            onChange={(e) => setEmail(e.target.value)}\n          />\n          <input\n            data-ui=\"input\"\n            type=\"password\"\n            placeholder=\"Password\"\n            autoComplete=\"new-password\"\n            minLength={4}\n            value={password}\n            onChange={(e) => setPassword(e.target.value)}\n          />\n\n          <button data-ui=\"btn\" type=\"submit\" disabled={submitting}>\n            {submitting ? \"Creating\u2026\" : \"Create\"}\n          </button>\n        </div>\n\n        <div data-ui=\"auth-footer\">\n          Already have an account?{\" \"}\n          <Link to=\"/login\" style={{ color: \"var(--accent)\", fontWeight: 900 }}>\n            Sign in\n          </Link>\n        </div>\n      </form>\n    </div>\n  );\n}\n",
+            "notes": "Signup page template",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 15:41:34.254737",
+            "updated_at": "2026-02-07 15:41:34.254744",
+            "metadata_tag": null
+        },
+        {
+            "id": 40,
+            "title": "DataContext.jsx",
+            "code": "import { createContext } from \"react\";\n\nexport const DataContext = createContext();",
+            "notes": "Creates context object for sharing state across components.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 15:49:29.829521",
+            "updated_at": "2026-02-07 15:49:29.829523",
+            "metadata_tag": null
+        },
+        {
+            "id": 41,
+            "title": "NoResults.jsx",
+            "code": "export function NoResults({ title = \"No results\", hint = \"Try different filters.\" }) {\n  return (\n    <div className=\"no-results\">\n      <div className=\"no-results-title\">{title}</div>\n      <div className=\"no-results-hint\">{hint}</div>\n    </div>\n  );\n}\n",
+            "notes": "Default view when filter or search empty",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 16:02:58.324557",
+            "updated_at": "2026-02-07 16:02:58.324560",
+            "metadata_tag": null
+        },
+        {
+            "id": 42,
+            "title": "Run Frontend Scaffold",
+            "code": "cd ~/Desktop/CODE/_scripts\n./scaffold.sh",
+            "notes": "Navigates to the local scripts directory and executes the scaffold.sh script to initialize a new react template in ../Desktop/CODE/_sandbox",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 17:45:34.611309",
+            "updated_at": "2026-02-07 17:45:34.611315",
+            "metadata_tag": null
+        },
+        {
+            "id": 43,
+            "title": "Search Codebase",
+            "code": "grep -r \"Term\" src/",
+            "notes": "Uses grep to recursively search for all occurrences of the \"useCatering\" string within the src/ directory. Useful for finding where a specific hook or variable is defined or utilized.",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 17:46:47.868601",
+            "updated_at": "2026-02-07 17:46:47.868608",
+            "metadata_tag": null
+        },
+        {
+            "id": 44,
+            "title": "Delete All Screenshots",
+            "code": "rm ~/Downloads/screenshot*.png",
+            "notes": "Uses the rm command with a wildcard (*) to permanently remove all files in the Downloads directory that start with \"screenshot\" and end in \".png\".",
+            "created_by_user_id": 1,
+            "is_public": 1,
+            "created_at": "2026-02-07 17:47:43.392652",
+            "updated_at": "2026-02-07 17:47:43.392658",
+            "metadata_tag": null
+        }
+    ],
+    "cheat_platforms": [
+        {
+            "cheat_id": 11,
+            "platform_id": 3
+        },
+        {
+            "cheat_id": 11,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 6,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 3,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 4,
+            "platform_id": 3
+        },
+        {
+            "cheat_id": 4,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 2,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 7,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 10,
+            "platform_id": 3
+        },
+        {
+            "cheat_id": 10,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 10,
+            "platform_id": 7
+        },
+        {
+            "cheat_id": 12,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 13,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 15,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 14,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 17,
+            "platform_id": 1
+        },
+        {
+            "cheat_id": 20,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 21,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 22,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 23,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 24,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 9,
+            "platform_id": 3
+        },
+        {
+            "cheat_id": 25,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 26,
+            "platform_id": 3
+        },
+        {
+            "cheat_id": 26,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 27,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 28,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 16,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 29,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 30,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 31,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 32,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 33,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 34,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 35,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 36,
+            "platform_id": 3
+        },
+        {
+            "cheat_id": 18,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 37,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 38,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 39,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 40,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 41,
+            "platform_id": 5
+        },
+        {
+            "cheat_id": 8,
+            "platform_id": 3
+        },
+        {
+            "cheat_id": 42,
+            "platform_id": 7
+        },
+        {
+            "cheat_id": 43,
+            "platform_id": 7
+        },
+        {
+            "cheat_id": 44,
+            "platform_id": 7
+        },
+        {
+            "cheat_id": 5,
+            "platform_id": 7
+        }
+    ],
+    "cheat_topics": [
+        {
+            "cheat_id": 11,
+            "topic_id": 10
+        },
+        {
+            "cheat_id": 11,
+            "topic_id": 5
+        },
+        {
+            "cheat_id": 11,
+            "topic_id": 7
+        },
+        {
+            "cheat_id": 6,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 3,
+            "topic_id": 5
+        },
+        {
+            "cheat_id": 3,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 4,
+            "topic_id": 3
+        },
+        {
+            "cheat_id": 2,
+            "topic_id": 5
+        },
+        {
+            "cheat_id": 7,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 10,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 10,
+            "topic_id": 7
+        },
+        {
+            "cheat_id": 12,
+            "topic_id": 5
+        },
+        {
+            "cheat_id": 12,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 13,
+            "topic_id": 5
+        },
+        {
+            "cheat_id": 13,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 15,
+            "topic_id": 12
+        },
+        {
+            "cheat_id": 15,
+            "topic_id": 5
+        },
+        {
+            "cheat_id": 14,
+            "topic_id": 8
+        },
+        {
+            "cheat_id": 14,
+            "topic_id": 5
+        },
+        {
+            "cheat_id": 17,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 20,
+            "topic_id": 5
+        },
+        {
+            "cheat_id": 20,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 21,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 22,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 22,
+            "topic_id": 7
+        },
+        {
+            "cheat_id": 23,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 23,
+            "topic_id": 7
+        },
+        {
+            "cheat_id": 24,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 24,
+            "topic_id": 7
+        },
+        {
+            "cheat_id": 9,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 9,
+            "topic_id": 7
+        },
+        {
+            "cheat_id": 25,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 25,
+            "topic_id": 7
+        },
+        {
+            "cheat_id": 26,
+            "topic_id": 12
+        },
+        {
+            "cheat_id": 26,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 27,
+            "topic_id": 5
+        },
+        {
+            "cheat_id": 27,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 28,
+            "topic_id": 5
+        },
+        {
+            "cheat_id": 28,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 16,
+            "topic_id": 11
+        },
+        {
+            "cheat_id": 16,
+            "topic_id": 5
+        },
+        {
+            "cheat_id": 16,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 29,
+            "topic_id": 5
+        },
+        {
+            "cheat_id": 29,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 30,
+            "topic_id": 5
+        },
+        {
+            "cheat_id": 30,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 31,
+            "topic_id": 5
+        },
+        {
+            "cheat_id": 31,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 32,
+            "topic_id": 5
+        },
+        {
+            "cheat_id": 32,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 33,
+            "topic_id": 5
+        },
+        {
+            "cheat_id": 33,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 34,
+            "topic_id": 12
+        },
+        {
+            "cheat_id": 34,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 34,
+            "topic_id": 7
+        },
+        {
+            "cheat_id": 35,
+            "topic_id": 5
+        },
+        {
+            "cheat_id": 35,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 35,
+            "topic_id": 7
+        },
+        {
+            "cheat_id": 36,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 36,
+            "topic_id": 7
+        },
+        {
+            "cheat_id": 18,
+            "topic_id": 11
+        },
+        {
+            "cheat_id": 18,
+            "topic_id": 5
+        },
+        {
+            "cheat_id": 37,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 38,
+            "topic_id": 5
+        },
+        {
+            "cheat_id": 39,
+            "topic_id": 5
+        },
+        {
+            "cheat_id": 40,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 40,
+            "topic_id": 7
+        },
+        {
+            "cheat_id": 41,
+            "topic_id": 5
+        },
+        {
+            "cheat_id": 41,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 8,
+            "topic_id": 8
+        },
+        {
+            "cheat_id": 8,
+            "topic_id": 10
+        },
+        {
+            "cheat_id": 42,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 43,
+            "topic_id": 8
+        },
+        {
+            "cheat_id": 43,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 44,
+            "topic_id": 13
+        },
+        {
+            "cheat_id": 44,
+            "topic_id": 6
+        },
+        {
+            "cheat_id": 5,
+            "topic_id": 6
+        }
+    ],
+    "user_cheats": []
+}
